@@ -1,0 +1,424 @@
+/* --- СБРОС И ОБЩИЕ СТИЛИ --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cormorant Garamond', serif;
+}
+
+/* ================================================= */
+/* =================== ШАПКА (HEADER) =============== */
+/* ================================================= */
+
+.header {
+    width: 100%;
+    height: 500px; 
+    background: #ffdbf7;
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- АНИМАЦИЯ ФОНА (ЦВЕТЫ) --- */
+.bg-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; 
+    pointer-events: none;
+}
+
+.floating-flower {
+    position: absolute;
+    bottom: -150px;
+    width: 180px;
+    height: 180px;
+    background-image: url('photos/flower.svg'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.4;
+    animation-name: floatUp;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0) translateX(0) rotate(0deg) scale(0.8); opacity: 0; }
+    10% { opacity: 0.4; }
+    50% { transform: translateY(-300px) translateX(40px) rotate(45deg) scale(1.1); opacity: 0.5; }
+    90% { opacity: 0.4; }
+    100% { transform: translateY(-600px) translateX(-40px) rotate(90deg) scale(0.9); opacity: 0; }
+}
+
+/* --- ЛОГОТИП HANDY --- */
+.logo {
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%) scaleY(2);
+    font-family: 'Cormorant Garamond', "Times New Roman", serif;
+    font-size: 27vw; 
+    font-weight: 300; 
+    letter-spacing: -3px; 
+    line-height: 0.8; 
+    color: #c4c4c4;
+    white-space: nowrap;
+    text-shadow: 75px 0px 0 #ffffff; 
+    z-index: 2;
+    animation: breathe 4s ease-in-out infinite alternate;
+}
+
+@keyframes breathe {
+    0% { transform: translate(-50%, -50%) scaleY(2) scaleX(1); }
+    100% { transform: translate(-50%, -50%) scaleY(2.05) scaleX(1.02); }
+}
+
+/* --- ВХОД (ЛОГИН) --- */
+.login {
+    position: absolute;
+    top: 15px;
+    right: 9%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #bd83a7;
+    text-decoration: none;
+    font-family: Georgia, serif;
+    font-size: 15px;
+    z-index: 5;
+}
+
+.user-icon {
+    display: block;
+    width: 50px;
+    height: 50px;
+    background-image: url('photos/user-icon.svg'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* --- УГЛОВЫЕ ЦВЕТЫ ШАПКИ --- */
+.flower {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    z-index: 4;
+    background-image: url('photos/flower.svg'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.flower-left { top: -5px; left: 2px; }
+.flower-right { bottom: -5px; right: 0; }
+
+/* ================================================= */
+/* =================== МЕНЮ (NAV) ================== */
+/* ================================================= */
+
+.nav-menu {
+    position: static;            
+    transform: none;             
+    width: 100%;
+    background: #ffffff;         
+    padding: 45px 0 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 120px;                  
+    z-index: 10;
+}
+
+.menu-btn {
+    position: relative;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    padding: 7px 40px; 
+    background-color: #bfbfbf; 
+    border: 2px solid #ffcce6; 
+    color: #ffffff; 
+    
+    font-family: 'Georgia', serif; 
+    font-size: 18px;
+    text-transform: lowercase; 
+    text-decoration: none;
+    letter-spacing: 1px;
+    
+    white-space: nowrap; 
+    
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+    overflow: visible; 
+}
+
+.menu-btn:hover {
+    background-color: #ff69b4; 
+    border-color: #ffffff;
+    animation: shootBubbles 0.6s ease-out forwards;
+}
+
+/* --- АНИМАЦИЯ ШАРИКОВ --- */
+@keyframes shootBubbles {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.7);
+    }
+    100% {
+        box-shadow: 
+            -20px -20px 0 0 rgba(255, 105, 180, 0.6),
+            20px -30px 0 0 rgba(255, 204, 230, 0.8),
+            -30px 0px 0 0 rgba(255, 105, 180, 0.5),
+            30px -10px 0 0 rgba(255, 204, 230, 0.7),
+            0px -40px 0 0 rgba(255, 105, 180, 0.4);
+    }
+}
+
+/* ================================================= */
+/* ============ БЛОК «ВИДЕО ОБЗОР» ================= */
+/* ================================================= */
+
+.video-section {
+    width: 100%;
+    background: #ffffff;          
+    padding: 70px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.video-frame {
+    position: relative;
+    width: 92%;
+    max-width: 1150px;
+
+    /* Толстая розовая рамка + белая подложка */
+    border: 10px solid #ffcce6;
+    background: #ffffff;
+    padding: 28px;
+}
+
+/* --- ВИДЕО --- */
+.video-placeholder {
+    width: 100%;
+    height: 360px;          
+    background: #000;       
+    
+    /* Заполняет блок, обрезая лишнее */
+    object-fit: cover;      
+    
+    display: block;         
+    border: none;
+}
+
+/* ---------- Цветочки на углах видео ---------- */
+.video-flower {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    background-image: url('photos/flower.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 5;
+    pointer-events: none;
+
+    animation: flowerSpin 9s linear infinite;
+}
+
+.video-flower-tr { top: -48px; right: -34px; }
+.video-flower-bl { bottom: -48px; left: -34px; animation-direction: reverse; }
+
+@keyframes flowerSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* ================================================= */
+/* ============ БЛОК «НАШИ РАБОТЫ» ================== */
+/* ================================================= */
+
+.portfolio-section {
+    width: 100%;
+    background: #ffffff;
+    padding: 60px 0 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- КРАСИВЫЙ ЗАГОЛОВОК --- */
+.portfolio-title {
+    position: relative;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: #c4c4c4; /* Тот же серый, что и в шапке */
+    text-transform: lowercase;
+    letter-spacing: 8px;
+    margin-bottom: 70px;
+    text-align: center;
+    
+    /* Легкая пульсация, как у логотипа */
+    animation: titleBreathe 5s ease-in-out infinite alternate;
+}
+
+/* Белая тень для объема */
+.portfolio-title::before {
+    content: 'наши работы';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    color: #ffffff;
+    z-index: -1;
+    opacity: 0.8;
+}
+
+/* Декоративное подчеркивание снизу */
+.portfolio-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background: #ffcce6;
+    box-shadow: 0 0 10px #ff69b4; /* Легкое свечение */
+}
+
+@keyframes titleBreathe {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.03); }
+}
+
+/* --- СЕТКА КАРТОЧЕК --- */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px; 
+    width: 90%;
+    max-width: 1100px;
+}
+
+/* --- СТИЛИ САМОЙ КАРТОЧКИ --- */
+.work-card {
+    position: relative;
+    background: #ffffff;
+    border: 8px solid #ffcce6; 
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Серый прямоугольник для фото */
+.work-photo {
+    width: 100%;
+    height: 280px;
+    background: #d3d3d3;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+    color: #000000;
+}
+
+/* Серая плашка для имени мастера */
+.work-master {
+    width: 100%;
+    padding: 8px 0;
+    background: #bfbfbf;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    font-family: 'Georgia', serif;
+    font-size: 16px;
+    color: #ffffff;
+    text-transform: lowercase;
+    letter-spacing: 1px;
+}
+
+/* Розовый блок для описания и стоимости */
+.work-desc {
+    width: 100%;
+    padding: 12px 15px;
+    background: #ffb3d9; 
+    
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* ---------- Декоративные цветочки на карточках ---------- */
+.card-flower {
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    background-image: url('photos/flower.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 5;
+    pointer-events: none;
+    
+    /* Анимация вращения */
+    animation: flowerSpin 12s linear infinite;
+}
+
+/* Позиционирование цветочков */
+.card-flower-tr { 
+    top: -40px; 
+    right: -30px; 
+}
+
+.card-flower-br { 
+    bottom: -40px; 
+    right: -30px; 
+    animation-direction: reverse; 
+}
+
+.card-flower-tl { 
+    top: -40px; 
+    left: -30px; 
+}
+
+.card-flower-bl { 
+    bottom: -40px; 
+    left: -30px; 
+    animation-direction: reverse; 
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr; 
+        gap: 40px;
+    }
+}
+/* --- НАСТРОЙКА КАРТИНКИ В КАРТОЧКЕ --- */
+.work-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Картинка заполнит весь блок, обрезав лишнее */
+    display: block;
+    border-radius: 0; /* На случай, если где-то были скругления */
+}
+
+/* Чтобы картинка не вылезала за пределы розовой рамки */
+.work-photo {
+    overflow: hidden;
+}

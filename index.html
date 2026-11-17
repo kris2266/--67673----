@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <!-- Контейнер для анимации -->
+        <div class="bg-animation">
+            <div class="floating-flower" style="left: 5%; animation-duration: 12s; animation-delay: 0s;"></div>
+            <div class="floating-flower" style="left: 25%; animation-duration: 16s; animation-delay: 3s;"></div>
+            <div class="floating-flower" style="left: 45%; animation-duration: 14s; animation-delay: 1s;"></div>
+            <div class="floating-flower" style="left: 65%; animation-duration: 18s; animation-delay: 5s;"></div>
+            <div class="floating-flower" style="left: 85%; animation-duration: 15s; animation-delay: 2s;"></div>
+        </div>
+
+        <div class="logo">HANDY</div>
+
+        <a href="#" class="login">
+            <span class="user-icon"></span>
+            <span>ВОЙТИ</span>
+        </a>
+
+        <div class="flower flower-left"></div>
+        <div class="flower flower-right"></div>
+        
+    </header>
+    <nav class="nav-menu">
+    <a href="#" class="menu-btn" data-text="главная">главная</a>
+    <a href="#" class="menu-btn" data-text="о нас">о нас</a>
+    <a href="#" class="menu-btn" data-text="мастера">мастера</a>
+    <a href="#" class="menu-btn" data-text="услуги">услуги</a>
+</nav>
+<section class="video-section">
+    <div class="video-frame">
+        <!-- Видео с классом для стилизации -->
+       <video class="video-placeholder" autoplay loop muted playsinline>
+    <source src="491043fb57cb6d7472e413433f4d040e.mp4" type="video/mp4">
+    Ваш браузер не поддерживает видео.
+</video>
+
+        <!-- цветочки на углах -->
+        <div class="video-flower video-flower-tr"></div>
+        <div class="video-flower video-flower-bl"></div>
+    </div>
+</section>
+<section class="portfolio-section">
+    <h2 class="portfolio-title">наши работы</h2>
+    
+    <div class="portfolio-grid">
+        <!-- Карточка 1 -->
+        <article class="work-card">
+            <div class="work-photo">
+                <video class="video-placeholder" autoplay loop muted playsinline>
+    <source src="de0ad2b6d7f8425f401b5a7e0b1e6067.mp4" type="video/mp4">
+    Ваш браузер не поддерживает видео.
+</video>
+            </div>
+            <div class="work-master">Дарья Хафизова</div>
+            <div class="work-desc">нежный нюдовый маникюр, форма миндаль, без дизайна, выполнен с выравниванием и наращиванием <br>2000руб.</div>
+            
+            <div class="card-flower card-flower-tr"></div>
+            <div class="card-flower card-flower-bl"></div>
+        </article>
+
+        <!-- Карточка 2 -->
+        <article class="work-card">
+            <div class="work-photo">
+                <img src="photos/primer3.jpg">
+            </div>
+            <div class="work-master">Мария Макривская</div>
+            <div class="work-desc">нежный френч с блестящим гель-лаком, выполнен с выращиванием без наращивания<br>2300руб.</div>
+            
+            <div class="card-flower card-flower-tr"></div>
+            <div class="card-flower card-flower-bl"></div>
+        </article>
+
+     
+
+        <!-- Карточка 4 (цветы слева) -->
+        <article class="work-card">
+            <div class="work-photo">
+                <img src="photos/primer4.jpg">
+            </div>
+            <div class="work-master">Софья Высоцкая</div>
+            <div class="work-desc">когти, выполнены из светоотражающей базы, в качестве дизайна использованы фигурки в виде пирсинга <br>4500руб.</div>
+            
+            <!-- Оба цветка слева -->
+            <div class="card-flower card-flower-tl"></div>
+            <div class="card-flower card-flower-bl"></div>
+        </article>
+                   <!-- Карточка 3 (цветы справа) -->
+        <article class="work-card">
+            <div class="work-photo">
+                <video class="video-placeholder" autoplay loop muted playsinline>
+    <source src="af534c97839cb90a2e26cb214d502e0e_720w.mp4" type="video/mp4">
+    Ваш браузер не поддерживает видео.
+</video>
+            </div>
+            <div class="work-master">Лариса Апельсинова</div>
+            <div class="work-desc">креативный дизайн, выполнен с использованием матового покрытия и с объемными элементами<br>2800руб.</div>
+            
+            <!-- Оба цветка справа -->
+            <div class="card-flower card-flower-tr"></div>
+            <div class="card-flower card-flower-br"></div>
+        </article>
+    </div>
+</section>
+
+       
+</body>
+</html>
