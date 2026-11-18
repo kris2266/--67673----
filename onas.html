@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О нас — HANDY</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="onasstyle.css">
+</head>
+<body>
+
+    <!-- ===== ШАПКА ===== -->
+    <header class="header">
+        <div class="bg-animation">
+            <div class="floating-flower" style="left: 5%; animation-duration: 12s; animation-delay: 0s;"></div>
+            <div class="floating-flower" style="left: 25%; animation-duration: 16s; animation-delay: 3s;"></div>
+            <div class="floating-flower" style="left: 45%; animation-duration: 14s; animation-delay: 1s;"></div>
+            <div class="floating-flower" style="left: 65%; animation-duration: 18s; animation-delay: 5s;"></div>
+            <div class="floating-flower" style="left: 85%; animation-duration: 15s; animation-delay: 2s;"></div>
+        </div>
+
+        <div class="logo">HANDY</div>
+
+        <a href="#" class="login">
+            <span class="user-icon"></span>
+            <span>ВОЙТИ</span>
+        </a>
+
+        <div class="flower flower-left"></div>
+        <div class="flower flower-right"></div>
+    </header>
+
+    <!-- ===== МЕНЮ ===== -->
+    <nav class="nav-menu">
+        <a href="index.html" class="menu-btn" data-text="главная">главная</a>
+        <a href="onas.html" class="menu-btn" data-text="о нас">о нас</a>
+        <a href="#" class="menu-btn" data-text="мастера">мастера</a>
+        <a href="#" class="menu-btn" data-text="услуги">услуги</a>
+    </nav>
+
+    <!-- ===== БЛОК «НАША ИСТОРИЯ» ===== -->
+    <section class="history-section">
+        <div class="history-header">
+            <div class="history-gif history-gif-left">
+                <span class="gif-placeholder">
+                    <img src="photos/dance-bunny.gif" alt="">
+                </span>
+            </div>
+
+            <div class="history-title">
+                <svg viewBox="0 0 600 120" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <path id="historyCurve" d="M 60,90 Q 300,10 540,90" fill="none" />
+                    </defs>
+                    <text>
+                        <textPath href="#historyCurve" startOffset="50%" text-anchor="middle">наша история</textPath>
+                    </text>
+                </svg>
+            </div>
+
+            <div class="history-gif history-gif-right">
+                <span class="gif-placeholder">
+                    <img src="photos/dance-bunny.gif" alt="">
+                </span>
+            </div>
+        </div>
+
+        <div class="history-frame">
+            <div class="history-caption">
+                начинали с маленького салона на окраине
+            </div>
+
+            <div class="history-photo">
+                <span class="photo-placeholder">
+                    <video class="video-placeholder" autoplay loop muted playsinline>
+                        <source src="0931720b444207a58401d653c1fafd0e_720w.mp4" type="video/mp4">
+                        Ваш браузер не поддерживает видео.
+                    </video>
+                </span>
+            </div>
+
+            <div class="history-flower"></div>
+        </div>
+    </section>
+
+    <!-- ===== БЛОК С КАРТОЙ ===== -->
+    <section class="map-section">
+        <div class="map-frame">
+            <div class="map-caption">
+                затем начали открывать точки повсему городу
+            </div>
+
+            <div class="map-container" id="yandex-map"></div>
+
+            <div class="map-flower"></div>
+        </div>
+    </section>
+
+    <!-- ===== БЛОК «ФРАНШИЗА» ===== -->
+    <section class="franchise-section">
+        <div class="franchise-frame">
+            <div class="franchise-flower"></div>
+
+            <div class="franchise-caption-row">
+                <div class="franchise-gif franchise-gif-left">
+                    <img src="photos/dance-bunny.gif" alt="">
+                </div>
+                <div class="franchise-caption">
+                    теперь у нас огромная франшиза
+                </div>
+                <div class="franchise-gif franchise-gif-right">
+                    <img src="photos/dance-bunny.gif" alt="">
+                </div>
+            </div>
+
+            <div class="franchise-gallery">
+                <div class="franchise-photo">
+                    <img src="photos/franshiza1.webp" alt="">
+                </div>
+                <div class="franchise-photo">
+                    <img src="photos/franshiza2.jpg" alt="">
+                </div>
+                <div class="franchise-photo">
+                    <img src="photos/franshiza3.webp" alt="">
+                </div>
+                <div class="franchise-photo">
+                    <img src="photos/franshiza4.webp" alt="">
+                </div>
+                <div class="franchise-photo">
+                    <img src="photos/franshiza5.webp" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== БЛОК «ОТЗЫВЫ» ===== -->
+<section class="reviews-section">
+    <div class="reviews-header">
+        <div class="reviews-gif">
+            <img src="photos/gif2.jpg" alt="">
+        </div>
+
+        <div class="reviews-title">
+            <svg viewBox="0 0 600 120" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <path id="reviewsCurve" d="M 60,90 Q 300,10 540,90" fill="none" />
+                </defs>
+                <text>
+                    <textPath href="#reviewsCurve" startOffset="50%" text-anchor="middle">отзывы</textPath>
+                </text>
+            </svg>
+        </div>
+
+        <div class="reviews-gif">
+            <img src="photos/gif2.jpg" alt="">
+        </div>
+    </div>
+
+    <div class="reviews-frame">
+        <div class="reviews-grid" id="reviewsGrid"></div>
+
+        <!-- Пагинация -->
+        <div class="reviews-pagination" id="reviewsPagination"></div>
+
+        <button class="reviews-write-btn" id="openReviewModal">написать отзыв</button>
+
+        <div class="reviews-flower reviews-flower-bl"></div>
+    <div class="reviews-flower reviews-flower-tl"></div>
+    </div>
+</section>
+
+    <!-- ===== МОДАЛЬНОЕ ОКНО ДЛЯ ОТЗЫВА ===== -->
+    <div class="modal-overlay" id="reviewModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeReviewModal">&times;</button>
+            <h3 class="modal-title">оставить отзыв</h3>
+
+            <form class="booking-form" id="reviewForm">
+                <div class="form-group">
+                    <label for="review-name">Ваше имя / ник</label>
+                    <input type="text" id="review-name" placeholder="например, @anna_k" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="review-rating">Оценка</label>
+                    <select id="review-rating" required>
+                        <option value="" disabled selected>-- выберите --</option>
+                        <option value="5">★★★★★ (5)</option>
+                        <option value="4">★★★★ (4)</option>
+                        <option value="3">★★★ (3)</option>
+                        <option value="2">★★ (2)</option>
+                        <option value="1">★ (1)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="review-text">Текст отзыва</label>
+                    <textarea id="review-text" rows="4" placeholder="Расскажите о вашем визите..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">отправить</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== ПОДКЛЮЧЕНИЕ API ЯНДЕКС.КАРТ ===== -->
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=ВАШ_API_КЛЮЧ" type="text/javascript"></script>
+
+    <script>
+        // ===== КАРТА =====
+        ymaps.ready(function () {
+            var myMap = new ymaps.Map("yandex-map", {
+                center: [55.751244, 37.618423],
+                zoom: 11,
+                controls: ['zoomControl', 'fullscreenControl']
+            });
+
+            var points = [
+                { coords: [55.755826, 37.617300], title: 'HANDY на Тверской' },
+                { coords: [55.760180, 37.618600], title: 'HANDY на Арбате' },
+                { coords: [55.741200, 37.615600], title: 'HANDY на Патриарших' },
+                { coords: [55.731500, 37.602800], title: 'HANDY на Фрунзенской' },
+                { coords: [55.768800, 37.596800], title: 'HANDY на Красной Пресне' },
+                { coords: [55.749500, 37.539500], title: 'HANDY в Сити' },
+                { coords: [55.788500, 37.562500], title: 'HANDY на Динамо' },
+                { coords: [55.720000, 37.650000], title: 'HANDY на Таганской' }
+            ];
+
+            points.forEach(function (point) {
+                var placemark = new ymaps.Placemark(point.coords, {
+                    balloonContent: point.title,
+                    hintContent: point.title
+                }, {
+                    preset: 'islands#pinkIcon'
+                });
+                myMap.geoObjects.add(placemark);
+            });
+        });
+
+       // ===== ОТЗЫВЫ =====
+(function () {
+    const reviews = [
+        { author: '@anna_k', rating: 5, text: '«Хожу в HANDY уже полгода, и каждый раз в восторге! Мастера — настоящие волшебницы. Маникюр держится идеально, дизайн всегда точно по фото.»' },
+        { author: '@maria_s', rating: 5, text: '«Очень уютная атмосфера, приятная музыка, ароматный чай. Дарья сделала нежный нюдовый маникюр — влюбилась с первого взгляда!»' },
+        { author: '@ekaterina_v', rating: 5, text: '«Пришла на педикюр впервые и осталась в полном восторге. Всё стерильно, аккуратно, без боли. Обязательно вернусь ещё!»' },
+        { author: '@olga_p', rating: 5, text: '«Креативный дизайн от Ларисы — это просто космос! Нигде больше не находила такого подхода. Спасибо за индивидуальность!»' }
+    ];
+
+    const ITEMS_PER_PAGE = 2;
+    let currentPage = 1;
+
+    const grid = document.getElementById('reviewsGrid');
+    const pagination = document.getElementById('reviewsPagination');
+    const modal = document.getElementById('reviewModal');
+    const openBtn = document.getElementById('openReviewModal');
+    const closeBtn = document.getElementById('closeReviewModal');
+    const form = document.getElementById('reviewForm');
+
+    function renderStars(rating) {
+        return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+    }
+
+    function renderReviews() {
+        const totalPages = Math.ceil(reviews.length / ITEMS_PER_PAGE);
+        if (currentPage > totalPages) currentPage = totalPages;
+
+        const start = (currentPage - 1) * ITEMS_PER_PAGE;
+        const pageReviews = reviews.slice(start, start + ITEMS_PER_PAGE);
+
+        grid.innerHTML = pageReviews.map(r => `
+            <article class="review-card">
+                <div class="review-card-header">
+                    <span class="review-author">${r.author}</span>
+                    <span class="review-stars">${renderStars(r.rating)}</span>
+                </div>
+                <div class="review-text">${r.text}</div>
+            </article>
+        `).join('');
+
+        renderPagination(totalPages);
+    }
+
+    function renderPagination(totalPages) {
+        pagination.innerHTML = '';
+
+        const prevBtn = document.createElement('button');
+        prevBtn.className = 'page-btn';
+        prevBtn.textContent = '←';
+        prevBtn.disabled = currentPage === 1;
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) { currentPage--; renderReviews(); }
+        });
+        pagination.appendChild(prevBtn);
+
+        for (let i = 1; i <= totalPages; i++) {
+            const btn = document.createElement('button');
+            btn.className = 'page-btn' + (i === currentPage ? ' active' : '');
+            btn.textContent = i;
+            btn.addEventListener('click', () => {
+                currentPage = i;
+                renderReviews();
+            });
+            pagination.appendChild(btn);
+        }
+
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'page-btn';
+        nextBtn.textContent = '→';
+        nextBtn.disabled = currentPage === totalPages;
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < totalPages) { currentPage++; renderReviews(); }
+        });
+        pagination.appendChild(nextBtn);
+    }
+
+    openBtn.addEventListener('click', () => {
+        modal.classList.add('active');
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+        }
+    });
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById('review-name').value.trim();
+        const rating = parseInt(document.getElementById('review-rating').value, 10);
+        const text = document.getElementById('review-text').value.trim();
+
+        if (!name || !rating || !text) return;
+
+        reviews.unshift({
+            author: name.startsWith('@') ? name : '@' + name,
+            rating: rating,
+            text: '«' + text + '»'
+        });
+
+        currentPage = 1;
+        renderReviews();
+        form.reset();
+        modal.classList.remove('active');
+        grid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    renderReviews();
+})();
+    </script>
+</body>
+</html>

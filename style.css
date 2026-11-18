@@ -422,3 +422,492 @@ body {
 .work-photo {
     overflow: hidden;
 }
+.calendar-section {
+    width: 100%;
+    max-width: 900px;
+    padding: 40px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+}
+
+/* ===== ИЗОГНУТАЯ НАДПИСЬ HANDY ===== */
+.curved-title {
+    position: relative;
+    width: 100%;
+    height: 110px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+}
+
+.curved-title svg {
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    display: block;
+}
+
+.curved-title text {
+    font-family: 'Cormorant Garamond', "Times New Roman", serif;
+    font-size: 82px;
+    font-weight: 300;
+    fill: #ff69b4;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    filter: drop-shadow(0 4px 6px rgba(255, 105, 180, 0.25));
+}
+
+/* ===== ЗАГОЛОВОК КАЛЕНДАРЬ ===== */
+.calendar-title {
+    display: inline-block;
+    padding: 7px 40px;
+    background-color: #bfbfbf;
+    border: 2px solid #ffcce6;
+    color: #ffffff;
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    text-transform: lowercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+/* ===== НАЗВАНИЕ МЕСЯЦА ===== */
+.calendar-month {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: #ffb3d9;
+    text-transform: lowercase;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* ===== СЕТКА КАЛЕНДАРЯ ===== */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    width: 100%;
+    border-top: 2px solid #ffcce6;
+    border-left: 2px solid #ffcce6;
+}
+
+.calendar-day-header {
+    padding: 15px 0;
+    text-align: center;
+    font-family: 'Georgia', serif;
+    font-size: 16px;
+    color: #ffb3d9;
+    text-transform: lowercase;
+    border-right: 2px solid #ffcce6;
+    border-bottom: 2px solid #ffcce6;
+}
+
+.calendar-cell {
+    position: relative;
+    min-height: 100px;
+    padding: 10px;
+    border-right: 2px solid #ffcce6;
+    border-bottom: 2px solid #ffcce6;
+    transition: background-color 0.25s ease;
+    cursor: pointer;
+}
+
+.calendar-cell:hover {
+    background-color: rgba(255, 204, 230, 0.15);
+}
+
+/* Бледные цифры дней */
+.day-number {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    color: #ff97d4;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* ===== СЛОТЫ ЗАПИСЕЙ ===== */
+.appointment-slot {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    padding: 5px 0;
+    background: #ffb3d9;
+    color: #ffffff;
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 4px;
+    cursor: default;
+    z-index: 2;
+}
+
+/* ===== МОДАЛЬНОЕ ОКНО ===== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    position: relative;
+    background: #ffffff;
+    border: 8px solid #ffcce6;
+    padding: 40px;
+    width: 90%;
+    max-width: 500px;
+    transform: translateY(20px);
+    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: #ffb3d9;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #ff69b4;
+}
+
+.modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: #c4c4c4;
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: lowercase;
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+    color: #bd83a7;
+    text-transform: lowercase;
+}
+
+.form-group select,
+.form-group input {
+    padding: 12px 15px;
+    border: 2px solid #ffcce6;
+    border-radius: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #333;
+    background: #ffffff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group select:focus,
+.form-group input:focus {
+    outline: none;
+    border-color: #ff69b4;
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.3);
+}
+
+.submit-btn {
+    margin-top: 10px;
+    padding: 15px;
+    background: #ff69b4;
+    color: #ffffff;
+    border: none;
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    text-transform: lowercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 0;
+}
+
+.submit-btn:hover {
+    background: #d63384;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(214, 51, 132, 0.4);
+}
+
+/* ===== АДАПТИВ ===== */
+@media (max-width: 768px) {
+    .curved-title {
+        height: 80px;
+    }
+    .curved-title text {
+        font-size: 52px;
+    }
+    .calendar-grid {
+        width: 100%;
+    }
+    .calendar-cell {
+        min-height: 70px;
+        padding: 5px;
+    }
+    .day-number {
+        font-size: 12px;
+        top: 5px;
+        left: 6px;
+    }
+    .appointment-slot {
+        font-size: 12px;
+        padding: 3px 0;
+        left: 5px;
+        right: 5px;
+    }
+    .modal-content {
+        padding: 25px;
+    }
+}
+/* ===== БЛОК КАЛЕНДАРЯ ===== */
+.calendar-section {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;              /* центрирование блока */
+    padding: 40px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+}
+
+/* ===== ИЗОГНУТАЯ НАДПИСЬ HANDY ===== */
+.curved-title {
+    position: relative;
+    width: 100%;
+    height: 80px;
+    margin-bottom: -35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+    /* Анимация покачивания/дыхания для всего блока */
+    animation: logoBreathe 4s ease-in-out infinite alternate;
+    transform-origin: center center;
+}
+
+.curved-title svg {
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    display: block;
+}
+
+.curved-title text {
+    font-family: 'Cormorant Garamond', "Times New Roman", serif;
+    font-size: 82px;
+    font-weight: 300;
+    fill: #ff69b4;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    filter: drop-shadow(0 4px 6px rgba(255, 105, 180, 0.25));
+}
+
+@keyframes logoBreathe {
+    0%   { transform: scale(1); }
+    100% { transform: scale(1.3); }
+}
+
+/* ===== ЗАГОЛОВОК КАЛЕНДАРЬ ===== */
+.calendar-title {
+    display: inline-block;
+    padding: 7px 40px;
+    background-color: #bfbfbf;
+    border: 2px solid #ffcce6;
+    color: #ffffff;
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    text-transform: lowercase;
+    letter-spacing: 1px;
+    margin-top: 0;               /* убрали отступ сверху */
+    margin-bottom: 20px;
+}
+/* ================================================= */
+/* =================== ПОДВАЛ (FOOTER) ============= */
+/* ================================================= */
+
+.footer {
+    position: relative;
+    width: 100%;
+    background: #ffdbf7;          /* тот же розовый, что и в шапке */
+    overflow: hidden;
+    padding: 70px 0 60px;
+    min-height: 380px;
+}
+
+/* --- ФОНОВАЯ АНИМАЦИЯ ЦВЕТОВ (как в шапке) --- */
+.footer .bg-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.footer .floating-flower {
+    position: absolute;
+    bottom: -150px;
+    width: 160px;
+    height: 160px;
+    background-image: url('photos/flower.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.4;
+    animation-name: floatUp;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+/* --- ГИГАНТСКАЯ НАДПИСЬ HANDY (точно как в шапке) --- */
+.footer-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scaleY(2);
+    font-family: 'Cormorant Garamond', "Times New Roman", serif;
+    font-size: 27vw;
+    font-weight: 300;
+    letter-spacing: -3px;
+    line-height: 0.8;
+    white-space: nowrap;
+    color: #c4c4c4;
+    text-shadow: 75px 0px 0 #ffffff;
+    z-index: 1;
+    pointer-events: none;
+    animation: breathe 4s ease-in-out infinite alternate;
+}
+
+@keyframes breathe {
+    0%   { transform: translate(-50%, -50%) scaleY(2) scaleX(1); }
+    100% { transform: translate(-50%, -50%) scaleY(2.05) scaleX(1.02); }
+}
+
+/* --- КОНТЕНТ ПОДВАЛА (текст поверх букв) --- */
+.footer-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.footer-contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* --- СТРОКИ ТЕКСТА (без анимации появления и без hover-реакции) --- */
+.footer-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 25px;
+    font-weight: 600;
+    color: #bd83a7;
+    text-decoration: none;
+    line-height: 1.9;
+    pointer-events: none;        /* текст не реагирует на курсор */
+    user-select: none;           /* нельзя выделить (по желанию) */
+}
+
+
+
+/* Пустая строка-отступ между группами */
+.footer-gap {
+    margin-top: 22px;
+}
+
+/* --- ИКОНКИ СОЦСЕТЕЙ (единственное, что реагирует на hover) --- */
+.footer-social {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+    pointer-events: auto;        /* соцсети кликабельны */
+}
+
+.social-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #b76e9e;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.social-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: #ffffff;
+}
+
+.social-btn:hover {
+    background: #ff69b4;
+    transform: translateY(-6px) scale(1.15) rotate(-8deg);
+    box-shadow: 0 8px 18px rgba(255, 105, 180, 0.5),
+                0 0 12px rgba(255, 204, 230, 0.9);
+}
+
+
+.footer .flower-left { top: -5px; left: 2px; }
+.footer .flower-right { bottom: -5px; right: 0; }
+
+/* --- АДАПТИВ --- */
+@media (max-width: 768px) {
+    .footer-logo {
+        font-size: 27vw;
+        text-shadow: 40px 0 0 #ffffff;
+    }
+    .footer-line {
+        font-size: 16px;
+    }
+    .footer .flower {
+        width: 70px;
+        height: 70px;
+    }
+}

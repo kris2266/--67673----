@@ -1,0 +1,1045 @@
+/* ================================================= */
+/* ============ СБРОС И ОБЩИЕ СТИЛИ ================= */
+/* ================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cormorant Garamond', serif;
+    background: #ffffff;
+}
+
+/* ================================================= */
+/* =================== ШАПКА (HEADER) =============== */
+/* ================================================= */
+
+.header {
+    width: 100%;
+    height: 500px;
+    background: #ffdbf7;
+    position: relative;
+    overflow: hidden;
+}
+
+.bg-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.floating-flower {
+    position: absolute;
+    bottom: -150px;
+    width: 180px;
+    height: 180px;
+    background-image: url('photos/flower.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.4;
+    animation-name: floatUp;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0) translateX(0) rotate(0deg) scale(0.8); opacity: 0; }
+    10% { opacity: 0.4; }
+    50% { transform: translateY(-300px) translateX(40px) rotate(45deg) scale(1.1); opacity: 0.5; }
+    90% { opacity: 0.4; }
+    100% { transform: translateY(-600px) translateX(-40px) rotate(90deg) scale(0.9); opacity: 0; }
+}
+
+.logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scaleY(2);
+    font-family: 'Cormorant Garamond', "Times New Roman", serif;
+    font-size: 27vw;
+    font-weight: 300;
+    letter-spacing: -3px;
+    line-height: 0.8;
+    color: #c4c4c4;
+    white-space: nowrap;
+    text-shadow: 75px 0px 0 #ffffff;
+    z-index: 2;
+    animation: breathe 4s ease-in-out infinite alternate;
+}
+
+@keyframes breathe {
+    0% { transform: translate(-50%, -50%) scaleY(2) scaleX(1); }
+    100% { transform: translate(-50%, -50%) scaleY(2.05) scaleX(1.02); }
+}
+
+.login {
+    position: absolute;
+    top: 15px;
+    right: 9%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #bd83a7;
+    text-decoration: none;
+    font-family: Georgia, serif;
+    font-size: 15px;
+    z-index: 5;
+}
+
+.user-icon {
+    display: block;
+    width: 50px;
+    height: 50px;
+    background-image: url('photos/user-icon.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.flower {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    z-index: 4;
+    background-image: url('photos/flower.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.flower-left { top: -5px; left: 2px; }
+.flower-right { bottom: -5px; right: 0; }
+
+/* ================================================= */
+/* =================== МЕНЮ (NAV) ================== */
+/* ================================================= */
+
+.nav-menu {
+    width: 100%;
+    background: #ffffff;
+    padding: 45px 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 120px;
+    z-index: 10;
+}
+
+.menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 40px;
+    background-color: #bfbfbf;
+    border: 2px solid #ffcce6;
+    color: #ffffff;
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    text-transform: lowercase;
+    text-decoration: none;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+    overflow: visible;
+}
+
+.menu-btn:hover {
+    background-color: #ff69b4;
+    border-color: #ffffff;
+    animation: shootBubbles 0.6s ease-out forwards;
+}
+
+@keyframes shootBubbles {
+    0% { box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.7); }
+    100% {
+        box-shadow:
+            -20px -20px 0 0 rgba(255, 105, 180, 0.6),
+            20px -30px 0 0 rgba(255, 204, 230, 0.8),
+            -30px 0px 0 0 rgba(255, 105, 180, 0.5),
+            30px -10px 0 0 rgba(255, 204, 230, 0.7),
+            0px -40px 0 0 rgba(255, 105, 180, 0.4);
+    }
+}
+
+/* ================================================= */
+/* ============ БЛОК «НАША ИСТОРИЯ» ================= */
+/* ================================================= */
+
+.history-section {
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 60px 20px 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.history-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 35px;
+}
+
+.history-gif {
+    flex-shrink: 0;
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.history-gif img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.history-title {
+    position: relative;
+    flex: 1;
+    max-width: 600px;
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+    animation: logoBreathe 4s ease-in-out infinite alternate;
+    transform-origin: center center;
+}
+
+.history-title svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.history-title text {
+    font-family: 'Cormorant Garamond', "Times New Roman", serif;
+    font-size: 82px;
+    font-weight: 300;
+    fill: #ff69b4;
+    letter-spacing: 4px;
+    text-transform: lowercase;
+    filter: drop-shadow(0 4px 6px rgba(255, 105, 180, 0.25));
+}
+
+@keyframes logoBreathe {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.15); }
+}
+
+.history-frame {
+    position: relative;
+    width: 100%;
+    border: 10px solid #ffcce6;
+    background: #ffffff;
+    padding: 35px 35px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.history-caption {
+    width: 100%;
+    padding: 14px 20px;
+    background: #bfbfbf;
+    color: #ffffff;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: lowercase;
+}
+
+.history-photo {
+    width: 100%;
+    max-width: 700px;
+    height: 300px;
+    background: #d3d3d3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.history-photo img,
+.history-photo video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.history-flower {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    bottom: -48px;
+    right: -34px;
+    background-image: url('photos/flower.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 5;
+    pointer-events: none;
+    animation: flowerSpin 9s linear infinite;
+}
+
+@keyframes flowerSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ================================================= */
+/* ============ БЛОК «КАРТА» ========================= */
+/* ================================================= */
+
+.map-section {
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 20px 20px 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.map-frame {
+    position: relative;
+    width: 100%;
+    border: 10px solid #ffcce6;
+    background: #ffffff;
+    padding: 30px 35px 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.map-caption {
+    width: 100%;
+    padding: 14px 20px;
+    background: #bfbfbf;
+    color: #ffffff;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: lowercase;
+}
+
+.map-container {
+    width: 100%;
+    height: 300px;
+    background: #d3d3d3;
+    overflow: hidden;
+    position: relative;
+}
+
+.map-flower {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    bottom: -48px;
+    left: -34px;
+    background-image: url('photos/flower.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 5;
+    pointer-events: none;
+    animation: flowerSpin 9s linear infinite reverse;
+}
+
+/* ================================================= */
+/* ============ БЛОК «ФРАНШИЗА» ===================== */
+/* ================================================= */
+
+.franchise-section {
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 20px 20px 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.franchise-frame {
+    position: relative;
+    width: 100%;
+    border: 10px solid #ffcce6;
+    background: #ffffff;
+    padding: 35px 35px 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.franchise-caption-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.franchise-gif {
+    flex-shrink: 0;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.franchise-gif img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.franchise-caption {
+    flex: 1;
+    padding: 14px 20px;
+    background: #bfbfbf;
+    color: #ffffff;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: lowercase;
+}
+
+.franchise-gallery {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.franchise-photo {
+    flex: 1;
+    aspect-ratio: 1 / 1;
+    background: #d3d3d3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.franchise-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+}
+
+.franchise-flower {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    top: -48px;
+    left: -34px;
+    background-image: url('photos/flower.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 5;
+    pointer-events: none;
+    animation: flowerSpin 9s linear infinite;
+}
+
+/* ================================================= */
+/* ============ БЛОК «ОТЗЫВЫ» ======================= */
+/* ================================================= */
+
+.reviews-section {
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 20px 20px 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reviews-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 35px;
+}
+
+.reviews-gif {
+    flex-shrink: 0;
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.reviews-gif img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.reviews-title {
+    position: relative;
+    flex: 1;
+    max-width: 600px;
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+    animation: logoBreathe 4s ease-in-out infinite alternate;
+    transform-origin: center center;
+}
+
+.reviews-title svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.reviews-title text {
+    font-family: 'Cormorant Garamond', "Times New Roman", serif;
+    font-size: 82px;
+    font-weight: 300;
+    fill: #ff69b4;
+    letter-spacing: 4px;
+    text-transform: lowercase;
+    filter: drop-shadow(0 4px 6px rgba(255, 105, 180, 0.25));
+}
+
+.reviews-frame {
+    position: relative;
+    width: 100%;
+    border: 10px solid #ffcce6;
+    background: #ffffff;
+    padding: 40px 35px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 35px;
+}
+
+.reviews-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.review-card {
+    background: #ffffff;
+    border: 6px solid #ffcce6;
+    padding: 22px 25px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Без линии под именем */
+.review-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.review-author {
+    font-family: 'Georgia', serif;
+    font-size: 16px;
+    color: #bd83a7;
+    text-transform: lowercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+
+.review-stars {
+    font-size: 18px;
+    color: #ff69b4;
+    letter-spacing: 2px;
+    white-space: nowrap;
+}
+
+.review-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #d46a9e;
+    line-height: 1.6;
+    text-align: left;
+    font-style: normal;
+}
+
+/* Кнопка «написать отзыв» — анимация как у меню */
+.reviews-write-btn {
+    padding: 14px 50px;
+    background: #bfbfbf;
+    color: #ffffff;
+    border: 2px solid #ffcce6;
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    text-transform: lowercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+    overflow: visible;
+}
+
+.reviews-write-btn:hover {
+    background: #ff69b4;
+    border-color: #ffffff;
+    animation: shootBubbles 0.6s ease-out forwards;
+}
+
+/* Два цветка: правый нижний и левый верхний */
+.reviews-flower {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    background-image: url('photos/flower.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.reviews-flower-bl {
+    bottom: -48px;
+    right: -34px;
+    animation: flowerSpin 9s linear infinite reverse;
+}
+
+.reviews-flower-tl {
+    top: -48px;
+    left: -34px;
+    animation: flowerSpin 9s linear infinite;
+}
+
+/* ================================================= */
+/* ============ ПАГИНАЦИЯ =========================== */
+/* ================================================= */
+
+.reviews-pagination {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-btn {
+    min-width: 38px;
+    height: 38px;
+    padding: 0 12px;
+    border: 2px solid #ffcce6;
+    background: #ffffff;
+    color: #bd83a7;
+    font-family: 'Georgia', serif;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.page-btn:hover:not(:disabled) {
+    background: #ffb3d9;
+    color: #ffffff;
+    border-color: #ffb3d9;
+}
+
+.page-btn.active {
+    background: #ff69b4;
+    color: #ffffff;
+    border-color: #ff69b4;
+    cursor: default;
+}
+
+.page-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* ================================================= */
+/* ============ МОДАЛЬНОЕ ОКНО ====================== */
+/* ================================================= */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    position: relative;
+    background: #ffffff;
+    border: 8px solid #ffcce6;
+    padding: 40px;
+    width: 90%;
+    max-width: 500px;
+    transform: translateY(20px);
+    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: #ffb3d9;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #ff69b4;
+}
+
+.modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: #c4c4c4;
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: lowercase;
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+    color: #bd83a7;
+    text-transform: lowercase;
+}
+
+.form-group select,
+.form-group input,
+.form-group textarea {
+    padding: 12px 15px;
+    border: 2px solid #ffcce6;
+    border-radius: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #333;
+    background: #ffffff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    resize: vertical;
+}
+
+.form-group select:focus,
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #ff69b4;
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.3);
+}
+
+.submit-btn {
+    margin-top: 10px;
+    padding: 15px;
+    background: #ff69b4;
+    color: #ffffff;
+    border: none;
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    text-transform: lowercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 0;
+}
+
+.submit-btn:hover {
+    background: #d63384;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(214, 51, 132, 0.4);
+}
+
+/* ================================================= */
+/* =================== ПОДВАЛ (FOOTER) ============= */
+/* ================================================= */
+
+.footer {
+    position: relative;
+    width: 100%;
+    background: #ffdbf7;
+    overflow: hidden;
+    padding: 70px 0 60px;
+    min-height: 380px;
+}
+
+.footer .bg-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.footer .floating-flower {
+    position: absolute;
+    bottom: -150px;
+    width: 160px;
+    height: 160px;
+    background-image: url('photos/flower.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.4;
+    animation-name: floatUp;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.footer-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scaleY(2);
+    font-family: 'Cormorant Garamond', "Times New Roman", serif;
+    font-size: 27vw;
+    font-weight: 300;
+    letter-spacing: -3px;
+    line-height: 0.8;
+    white-space: nowrap;
+    color: #c4c4c4;
+    text-shadow: 75px 0px 0 #ffffff;
+    z-index: 1;
+    pointer-events: none;
+    animation: breathe 4s ease-in-out infinite alternate;
+}
+
+.footer-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.footer-contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 25px;
+    font-weight: 600;
+    color: #bd83a7;
+    text-decoration: none;
+    line-height: 1.9;
+    pointer-events: none;
+    user-select: none;
+}
+
+.footer-gap {
+    margin-top: 22px;
+}
+
+.footer-social {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+    pointer-events: auto;
+}
+
+.social-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #b76e9e;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.social-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: #ffffff;
+}
+
+.social-btn:hover {
+    background: #ff69b4;
+    transform: translateY(-6px) scale(1.15) rotate(-8deg);
+    box-shadow: 0 8px 18px rgba(255, 105, 180, 0.5),
+                0 0 12px rgba(255, 204, 230, 0.9);
+}
+
+.footer .flower-left { top: -5px; left: 2px; }
+.footer .flower-right { bottom: -5px; right: 0; }
+
+/* ================================================= */
+/* =================== АДАПТИВ ===================== */
+/* ================================================= */
+
+@media (max-width: 768px) {
+    .history-header,
+    .reviews-header {
+        gap: 10px;
+    }
+    .history-gif,
+    .reviews-gif {
+        width: 60px;
+        height: 60px;
+    }
+    .history-title,
+    .reviews-title {
+        height: 70px;
+    }
+    .history-title text,
+    .reviews-title text {
+        font-size: 52px;
+    }
+    .history-caption,
+    .map-caption,
+    .franchise-caption {
+        font-size: 18px;
+        padding: 10px 14px;
+    }
+    .history-photo {
+        height: 220px;
+    }
+
+    /* Цветы — уменьшенный размер */
+    .history-flower,
+    .map-flower,
+    .franchise-flower,
+    .reviews-flower-bl,
+    .reviews-flower-tl {
+        width: 90px;
+        height: 90px;
+    }
+
+    .history-flower,
+    .reviews-flower-bl {
+        bottom: -34px;
+        right: -24px;
+    }
+
+    .map-flower {
+        bottom: -34px;
+        left: -24px;
+    }
+
+    .franchise-flower,
+    .reviews-flower-tl {
+        top: -34px;
+        left: -24px;
+    }
+
+    .reviews-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .review-text {
+        font-size: 16px;
+    }
+    .reviews-frame {
+        padding: 30px 20px 40px;
+    }
+    .reviews-write-btn {
+        font-size: 16px;
+        padding: 12px 30px;
+    }
+    .footer-logo {
+        font-size: 27vw;
+        text-shadow: 40px 0 0 #ffffff;
+    }
+    .footer-line {
+        font-size: 16px;
+    }
+    .footer .flower {
+        width: 70px;
+        height: 70px;
+    }
+    .franchise-caption-row {
+        gap: 10px;
+    }
+    .franchise-gif {
+        width: 50px;
+        height: 50px;
+    }
+    .franchise-gallery {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .franchise-photo {
+        flex: 0 0 calc(50% - 15px);
+        border-radius: 10px;
+    }
+    .franchise-photo img {
+        border-radius: 10px;
+    }
+}
