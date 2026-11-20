@@ -1,9 +1,9 @@
 (function() {
     // ===== НАСТРОЙКИ =====
-  const monthNames = [
-    'january', 'february', 'march', 'april', 'may', 'june',
-    'july', 'august', 'september', 'october', 'november', 'december'
-];
+    const monthNames = [
+        'january', 'february', 'march', 'april', 'may', 'june',
+        'july', 'august', 'september', 'october', 'november', 'december'
+    ];
     // Текущая дата (для демонстрации — ноябрь 2026)
     let currentYear = 2026;
     let currentMonth = 10; // 0 = январь, 10 = ноябрь
@@ -70,7 +70,7 @@
                 });
             }
 
-            // Обработчик клика для свободных ячеек
+            // ===== ОБРАБОТЧИК КЛИКА ПО ДНЮ =====
             cell.addEventListener('click', function(e) {
                 // Не открываем, если кликнули по слоту записи
                 if (e.target.classList.contains('appointment-slot')) return;
@@ -78,8 +78,17 @@
                 // Проверяем, есть ли уже записи
                 if (busySlots[day]) return; // занято — не открываем
 
-                // Открываем модальное окно
-                modalDateSpan.textContent = day + ' ' + monthNames[currentMonth];
+                const dateText = day + ' ' + monthNames[currentMonth];
+
+                // Показываем дату в модалке
+                modalDateSpan.textContent = dateText;
+
+                // Автоподстановка даты в поле формы
+                const dateInput = document.getElementById('booking-date-input');
+                if (dateInput) {
+                    dateInput.value = dateText;
+                }
+
                 modal.classList.add('active');
             });
 

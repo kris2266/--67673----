@@ -1043,3 +1043,507 @@ body {
         border-radius: 10px;
     }
 }
+/* ================================================= */
+/* ============ БЛОК «АДРЕСА И КОНТАКТЫ» ============ */
+/* ================================================= */
+
+.locations-section {
+    width: 100%;
+    background: #ffffff;
+    padding: 60px 0 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- ЗАГОЛОВКИ СЕКЦИЙ (серая плашка) --- */
+.section-header {
+    margin-bottom: 30px;
+}
+
+.header-title {
+    display: inline-block;
+    padding: 8px 45px;
+    background-color: #bfbfbf; /* Серый фон */
+    border: 2px solid #ffcce6; /* Розовая рамка */
+    color: #ffffff;
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    text-transform: lowercase;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.contacts-header {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+/* --- КАРТА --- */
+.map-wrapper {
+    width: 90%;
+    max-width: 1000px;
+    border: 8px solid #ffcce6;
+    padding: 10px;
+    background: #ffffff;
+    margin-bottom: 40px;
+}
+
+.map-container {
+    width: 100%;
+    height: 450px;
+    background: #d3d3d3;
+    overflow: hidden;
+    position: relative;
+}
+
+/* --- СТРОКА С АДРЕСАМИ И ГИФКОЙ --- */
+/* --- СТРОКА С АДРЕСАМИ И ГИФКОЙ --- */
+.info-row {
+    width: 90%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;   /* ← было flex-start, стало center — выравнивает по вертикали */
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+.zayac{
+    height: 250px;
+    width: 400px;
+}
+.addresses-block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+.info-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffb3d9;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.address-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: #ffb3d9;
+    line-height: 1.6;
+    letter-spacing: 1px;
+    position: relative;
+    display: block;
+    
+    transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* «Вау»-анимация при наведении */
+.address-line:hover {
+    color: #ff69b4;
+    transform: translateX(10px) scale(1.05);
+    text-shadow:
+        0 0 10px rgba(255, 105, 180, 0.9),
+        0 0 20px rgba(255, 105, 180, 0.7),
+        0 0 30px rgba(255, 204, 230, 0.5),
+        0 0 40px rgba(255, 105, 180, 0.3);
+    animation: addressPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes addressPulse {
+    0%, 100% {
+        transform: translateX(10px) scale(1.05);
+        text-shadow:
+            0 0 10px rgba(255, 105, 180, 0.9),
+            0 0 20px rgba(255, 105, 180, 0.7),
+            0 0 30px rgba(255, 204, 230, 0.5),
+            0 0 40px rgba(255, 105, 180, 0.3);
+    }
+    50% {
+        transform: translateX(14px) scale(1.08);
+        text-shadow:
+            0 0 15px rgba(255, 105, 180, 1),
+            0 0 30px rgba(255, 105, 180, 0.9),
+            0 0 45px rgba(255, 204, 230, 0.7),
+            0 0 60px rgba(255, 105, 180, 0.5);
+    }
+}
+
+/* Декоративная линия слева при наведении */
+.address-line::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%) scaleY(0);
+    width: 4px;
+    height: 80%;
+    background: linear-gradient(to bottom, #ff69b4, #ffb3d9);
+    border-radius: 2px;
+    transition: transform 0.3s ease;
+}
+
+.address-line:hover::before {
+    transform: translateY(-50%) scaleY(1);
+}
+
+/* --- КНОПКИ КОНТАКТОВ (просто блоки, не ссылки) --- */
+.contacts-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 50px;
+}
+
+.pill-btn {
+    flex: 1;
+    max-width: 350px;
+    padding: 12px 25px;
+    background: #fffefe;
+    color: #ab4463;
+    text-align: center;
+    border: 2px solid #ffcce6;
+    border-radius: 50px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+   
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pill-gif {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: 50%;
+}
+
+.pill-btn:hover {
+    background: #ff69b4;
+    border-color: #ffffff;
+    animation: shootBubbles 0.6s ease-out forwards;
+}
+/* --- СОЦСЕТИ (иконка сверху, текст снизу) --- */
+.social-grid {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.social-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.social-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px; /* Слегка скругленный квадрат */
+    background: #bd83a7; /* Фиолетово-розовый цвет иконок */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.social-icon svg {
+    width: 26px;
+    height: 26px;
+    fill: #ffffff;
+    cursor: pointer;
+}
+
+.social-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #bd83a7;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* Анимация иконок */
+.social-item:hover .social-icon {
+    background: #ff69b4;
+    transform: rotate(10deg) scale(1.1);
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+}
+
+.social-item:hover .social-text {
+    color: #ff69b4;
+}
+
+/* --- АДАПТИВ --- */
+@media (max-width: 768px) {
+    .info-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .addresses-block {
+        text-align: left;
+    }
+    
+    .contacts-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .pill-btn {
+        width: 100%;
+    }
+        .pill-gif {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .social-grid {
+        gap: 30px;
+    }
+}
+/* --- Вращающийся цветок на карте России --- */
+.map-wrapper {
+    position: relative; /* нужно, чтобы цветок позиционировался относительно карты */
+}
+
+.map-flower-russia {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    bottom: -48px;          /* свисает снизу-справа, как на других блоках */
+    right: -34px;
+    background-image: url('photos/flower.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 5;
+    pointer-events: none;
+    animation: flowerSpin 9s linear infinite reverse; /* вращение */
+}
+/* ================================================= */
+/* =================== ПОДВАЛ (FOOTER) ============= */
+/* ================================================= */
+
+.footer {
+    position: relative;
+    width: 100%;
+    background: #ffdbf7;          /* тот же розовый, что и в шапке */
+    overflow: hidden;
+    padding: 70px 0 60px;
+    min-height: 380px;
+}
+
+/* --- ФОНОВАЯ АНИМАЦИЯ ЦВЕТОВ (как в шапке) --- */
+.footer .bg-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.footer .floating-flower {
+    position: absolute;
+    bottom: -150px;
+    width: 160px;
+    height: 160px;
+    background-image: url('photos/flower.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.4;
+    animation-name: floatUp;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+/* --- ГИГАНТСКАЯ НАДПИСЬ HANDY (точно как в шапке) --- */
+.footer-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scaleY(2);
+    font-family: 'Cormorant Garamond', "Times New Roman", serif;
+    font-size: 27vw;
+    font-weight: 300;
+    letter-spacing: -3px;
+    line-height: 0.8;
+    white-space: nowrap;
+    color: #c4c4c4;
+    text-shadow: 75px 0px 0 #ffffff;
+    z-index: 1;
+    pointer-events: none;
+    animation: breathe 4s ease-in-out infinite alternate;
+}
+
+@keyframes breathe {
+    0%   { transform: translate(-50%, -50%) scaleY(2) scaleX(1); }
+    100% { transform: translate(-50%, -50%) scaleY(2.05) scaleX(1.02); }
+}
+
+/* --- КОНТЕНТ ПОДВАЛА (текст поверх букв) --- */
+.footer-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.footer-contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* --- СТРОКИ ТЕКСТА (без анимации появления и без hover-реакции) --- */
+.footer-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 25px;
+    font-weight: 600;
+    color: #bd83a7;
+    text-decoration: none;
+    line-height: 1.9;
+    pointer-events: none;        /* текст не реагирует на курсор */
+    user-select: none;           /* нельзя выделить (по желанию) */
+}
+
+
+
+/* Пустая строка-отступ между группами */
+.footer-gap {
+    margin-top: 22px;
+}
+
+/* --- ИКОНКИ СОЦСЕТЕЙ (единственное, что реагирует на hover) --- */
+.footer-social {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+    pointer-events: auto;        /* соцсети кликабельны */
+}
+
+.social-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #b76e9e;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.social-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: #ffffff;
+}
+
+.social-btn:hover {
+    background: #ff69b4;
+    transform: translateY(-6px) scale(1.15) rotate(-8deg);
+    box-shadow: 0 8px 18px rgba(255, 105, 180, 0.5),
+                0 0 12px rgba(255, 204, 230, 0.9);
+}
+
+
+.footer .flower-left { top: -5px; left: 2px; }
+.footer .flower-right { bottom: -5px; right: 0; }
+
+/* --- АДАПТИВ --- */
+@media (max-width: 768px) {
+    .footer-logo {
+        font-size: 27vw;
+        text-shadow: 40px 0 0 #ffffff;
+    }
+    .footer-line {
+        font-size: 16px;
+    }
+    .footer .flower {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+/* ================================================= */
+/* ===== ФОН С ЦВЕТОЧКАМИ В БЛОКАХ «О НАС» ========== */
+/* ================================================= */
+
+.history-frame .bg-animation,
+.map-frame .bg-animation,
+.franchise-frame .bg-animation,
+.reviews-frame .bg-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;   /* фон не вылезает за рамку */
+}
+
+.history-frame .floating-flower,
+.map-frame .floating-flower,
+.franchise-frame .floating-flower,
+.reviews-frame .floating-flower {
+    position: absolute;
+    bottom: -150px;
+    width: 160px;
+    height: 160px;
+    background-image: url('photos/flower.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.4;
+    animation-name: floatUp;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+/* Контент рамок — поверх фоновых цветов */
+.history-frame .history-caption,
+.history-frame .history-photo,
+.map-frame .map-caption,
+.map-frame .map-container,
+.franchise-frame .franchise-caption-row,
+.franchise-frame .franchise-gallery,
+.reviews-frame .reviews-grid,
+.reviews-frame .reviews-pagination,
+.reviews-frame .reviews-write-btn {
+    position: relative;
+    z-index: 2;
+}
+/* ===== АКТИВНАЯ КНОПКА МЕНЮ ===== */
+.menu-btn.active {
+    background-color: #ffb3d9;
+    border-color: #ffffff;
+    color: #ffffff;
+    cursor: default;
+}
+
+.menu-btn.active:hover {
+    background-color: #ffb3d9;
+    animation: none;
+}

@@ -911,3 +911,46 @@ body {
         height: 70px;
     }
 }
+/* ===== АКТИВНАЯ КНОПКА МЕНЮ ===== */
+.menu-btn.active {
+    background-color: #ffb3d9;
+    border-color: #ffffff;
+    color: #ffffff;
+    cursor: default;
+}
+
+.menu-btn.active:hover {
+    background-color: #ffb3d9;
+    animation: none;
+}
+.master-name1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.master-name1 .modal-title {
+    margin: 0;              /* убираем нижний отступ у h3 */
+    line-height: 1.2;       /* ровная высота строки */
+    white-space: nowrap;    /* текст не переносится */
+}
+
+.master-name1 .name-gif {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+/* ===== Анимация кнопки в модалке записи (как везде) ===== */
+.submit-btn {
+    overflow: visible;
+    transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: #ff69b4;
+    border-color: #ffffff;
+    animation: shootBubbles 0.6s ease-out forwards;
+}

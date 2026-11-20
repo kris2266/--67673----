@@ -32,11 +32,11 @@
         <div class="flower flower-right"></div>
         
     </header>
-    <nav class="nav-menu">
-    <a href="index.html" class="menu-btn" data-text="главная">главная</a>
+  <nav class="nav-menu">
+    <a href="index.html" class="menu-btn active" data-text="главная">главная</a>
     <a href="onas.html" class="menu-btn" data-text="о нас">о нас</a>
-    <a href="#" class="menu-btn" data-text="мастера">мастера</a>
-    <a href="#" class="menu-btn" data-text="услуги">услуги</a>
+    <a href="masters.html" class="menu-btn" data-text="мастера">мастера</a>
+    <a href="yslygi.html" class="menu-btn" data-text="услуги">услуги</a>
 </nav>
 <section class="video-section">
     <div class="video-frame">
@@ -146,29 +146,49 @@
 <div class="modal-overlay" id="bookingModal">
     <div class="modal-content">
         <button class="modal-close">&times;</button>
-        <h3 class="modal-title">Запись на <span id="modalDate"></span></h3>
+        <div class="master-name1">
+            <img src="photos/gif2.jpg" alt="" class="name-gif">
+            <h3 class="modal-title">Запись на <span id="modalDate"></span></h3>
+            <img src="photos/gif2.jpg" alt="" class="name-gif">
+</div>
+        
 
         <form class="booking-form">
             <div class="form-group">
                 <label for="master-select">Выберите мастера</label>
                 <select id="master-select" required>
-                    <option value="" disabled selected>-- выберите --</option>
+                    <option value="" disabled selected>выберите</option>
                     <option value="darya">Дарья Хафизова</option>
                     <option value="maria">Мария Макривская</option>
                     <option value="sofia">Софья Высоцкая</option>
                     <option value="larisa">Лариса Апельсинова</option>
+                    <option value="Валерия Юмашева">Валерия Юмашева</option>
+    <option value="Ксения Маева">Ксения Маева</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="service-select">Выберите услугу</label>
                 <select id="service-select" required>
-                    <option value="" disabled selected>-- выберите --</option>
-                    <option value="manicure">Маникюр с покрытием</option>
-                    <option value="pedicure">Педикюр с покрытием</option>
-                    <option value="design">Креативный дизайн</option>
-                    <option value="correction">Коррекция ногтей</option>
+                    <option value="" disabled selected>выберите</option>
+                    <option value="маникюр с покрытием">маникюр с покрытием</option>
+        <option value="педикюр с покрытием">педикюр с покрытием</option>
+        <option value="креативный дизайн">креативный дизайн</option>
+        <option value="коррекция ногтей">коррекция ногтей</option>
+        <option value="снятие покрытия">снятие покрытия</option>
+        <option value="наращивание длины">наращивание длины</option>
+        <option value="гигиенический маникюр">гигиенический маникюр</option>
+        <option value="гигиенический педикюр">гигиенический педикюр</option>
+        <option value="smart-педикюр">smart-педикюр</option>
                 </select>
+            </div>
+            <div class="form-group">
+    <label for="booking-date-input">Дата</label>
+    <input type="text" id="booking-date-input" readonly required>
+</div>
+            <div class="form-group">
+                <label for="booking-address">Адрес</label>
+                <input type="text" id="booking-address" placeholder="г. Москва, ул. ..." required>
             </div>
 
             <div class="form-group">
