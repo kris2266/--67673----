@@ -23,10 +23,10 @@
 
         <div class="logo">HANDY</div>
 
-        <a href="#" class="login">
-            <span class="user-icon"></span>
-            <span>ВОЙТИ</span>
-        </a>
+        <a href="/login.html" class="login" style="visibility: hidden;">
+    <span class="user-icon"></span>
+    <span class="login-text">ВОЙТИ</span>
+</a>
 
         <div class="flower flower-left"></div>
         <div class="flower flower-right"></div>
@@ -212,13 +212,13 @@
             <form class="booking-form" id="reviewForm">
                 <div class="form-group">
                     <label for="review-name">Ваше имя / ник</label>
-                    <input type="text" id="review-name" placeholder="например, @anna_k" required>
+                    <input type="text" id="review-name" placeholder="имя" required>
                 </div>
 
                 <div class="form-group">
                     <label for="review-rating">Оценка</label>
                     <select id="review-rating" required>
-                        <option value="" disabled selected>-- выберите --</option>
+                        <option value="" disabled selected>выберите</option>
                         <option value="5">★★★★★ (5)</option>
                         <option value="4">★★★★ (4)</option>
                         <option value="3">★★★ (3)</option>
@@ -460,13 +460,7 @@ ymaps.ready(function () {
 
        // ===== ОТЗЫВЫ =====
 (function () {
-    const reviews = [
-        { author: '@anna_k', rating: 5, text: 'Хожу в HANDY уже полгода, и каждый раз в восторге! Мастера настоящие волшебницы. Маникюр держится идеально, дизайн всегда точно по фото' },
-        { author: '@maria_s', rating: 5, text: 'Очень уютная атмосфера, приятная музыка, ароматный чай. Дарья сделала нежный нюдовый маникюр, влюбилась с первого взгляда!' },
-        { author: '@ekaterina_v', rating: 5, text: 'Пришла на педикюр впервые и осталась в полном восторге. Всё стерильно, аккуратно, без боли. Обязательно вернусь ещё!' },
-        { author: '@olga_p', rating: 5, text: 'Креативный дизайн от Ларисы это просто космос! Нигде больше не находила такого подхода. Спасибо за индивидуальность!' }
-    ];
-
+    let reviews = []; // Теперь отзывы будут загружаться с сервера
     const ITEMS_PER_PAGE = 2;
     let currentPage = 1;
 
@@ -483,10 +477,16 @@ ymaps.ready(function () {
 
     function renderReviews() {
         const totalPages = Math.ceil(reviews.length / ITEMS_PER_PAGE);
-        if (currentPage > totalPages) currentPage = totalPages;
+        if (currentPage > totalPages) currentPage = totalPages || 1;
 
         const start = (currentPage - 1) * ITEMS_PER_PAGE;
         const pageReviews = reviews.slice(start, start + ITEMS_PER_PAGE);
+
+        if (reviews.length === 0) {
+             grid.innerHTML = '<p style="text-align: center; width: 100%; color: #bd83a7;">Пока нет отзывов. Будьте первыми!</p>';
+             pagination.innerHTML = '';
+             return;
+        }
 
         grid.innerHTML = pageReviews.map(r => `
             <article class="review-card">
@@ -503,6 +503,7 @@ ymaps.ready(function () {
 
     function renderPagination(totalPages) {
         pagination.innerHTML = '';
+        if (totalPages <= 1) return;
 
         const prevBtn = document.createElement('button');
         prevBtn.className = 'page-btn';
@@ -534,6 +535,19 @@ ymaps.ready(function () {
         pagination.appendChild(nextBtn);
     }
 
+    // Загрузка отзывов с сервера при старте
+    async function loadReviews() {
+        try {
+            const res = await fetch('/api/reviews');
+            if (res.ok) {
+                reviews = await res.json();
+                renderReviews();
+            }
+        } catch (e) {
+            console.error('Ошибка загрузки отзывов', e);
+        }
+    }
+
     openBtn.addEventListener('click', () => {
         modal.classList.add('active');
     });
@@ -548,7 +562,8 @@ ymaps.ready(function () {
         }
     });
 
-    form.addEventListener('submit', function (e) {
+    // Отправка нового отзыва
+    form.addEventListener('submit', async function (e) {
         e.preventDefault();
 
         const name = document.getElementById('review-name').value.trim();
@@ -557,21 +572,37 @@ ymaps.ready(function () {
 
         if (!name || !rating || !text) return;
 
-        reviews.unshift({
+        const payload = {
             author: name.startsWith('@') ? name : '@' + name,
             rating: rating,
             text: '«' + text + '»'
-        });
+        };
 
-        currentPage = 1;
-        renderReviews();
-        form.reset();
-        modal.classList.remove('active');
-        grid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        try {
+            const res = await fetch('/api/reviews', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (res.ok) {
+                form.reset();
+                modal.classList.remove('active');
+                currentPage = 1;
+                await loadReviews(); // Перезагружаем отзывы из БД
+                grid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                alert('Не удалось сохранить отзыв');
+            }
+        } catch (e) {
+            alert('Ошибка соединения');
+        }
     });
 
-    renderReviews();
+    // Инициализация
+    loadReviews();
 })();
     </script>
+    <script src="widjet.js"></script>
 </body>
 </html>

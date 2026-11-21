@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход / Регистрация — HANDY</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background: #ffdbf7; min-height: 100vh; display: flex;
+               align-items: center; justify-content: center; }
+        .box {
+            background: #fff; border: 8px solid #ffcce6; padding: 40px;
+            width: 90%; max-width: 420px;
+        }
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: 34px;
+             color: #ff69b4; text-align: center; text-transform: lowercase;
+             margin-bottom: 25px; letter-spacing: 2px; }
+        form { display: flex; flex-direction: column; gap: 14px; }
+        label { font-family: Georgia, serif; font-size: 14px; color: #bd83a7;
+                text-transform: lowercase; }
+        input {
+            padding: 12px 15px; border: 2px solid #ffcce6;
+            font-family: 'Cormorant Garamond', serif; font-size: 16px;
+        }
+        input:focus { outline: none; border-color: #ff69b4; }
+        button {
+            padding: 14px; background: #ff69b4; color: #fff; border: none;
+            font-family: Georgia, serif; font-size: 17px; cursor: pointer;
+            text-transform: lowercase; letter-spacing: 1px; margin-top: 8px;
+        }
+        button:hover { background: #d63384; }
+        .switch { text-align: center; margin-top: 18px; font-family: Georgia, serif;
+                  font-size: 14px; color: #bd83a7; }
+        .switch a { color: #ff69b4; cursor: pointer; }
+        .error { color: #b3005e; font-family: Georgia, serif; font-size: 14px;
+                 text-align: center; margin-bottom: 10px; min-height: 18px; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <!-- ФОРМА ВХОДА -->
+        <div id="loginBox">
+            <h1>вход</h1>
+            <div class="error" id="loginError"></div>
+            <form id="loginForm">
+                <label>почта</label>
+                <input type="tel" name="phone" placeholder="почта" required>
+                <label>Пароль</label>
+                <input type="password" name="password" required>
+                <button type="submit">войти</button>
+            </form>
+            <p class="switch">Нет аккаунта?
+                <a onclick="showRegister()">зарегистрироваться</a></p>
+        </div>
+
+        <!-- ФОРМА РЕГИСТРАЦИИ -->
+        <div id="registerBox" class="hidden">
+            <h1>регистрация</h1>
+            <div class="error" id="registerError"></div>
+            <form id="registerForm">
+                <label>Имя</label>
+                <input type="text" name="name" required>
+                <label>Телефон</label>
+                <input type="tel" name="phone" placeholder="+7 777 777 77 77" required>
+                <label>Пароль (мин. 6 символов)</label>
+                <input type="password" name="password" minlength="6" required>
+                <button type="submit">зарегистрироваться</button>
+            </form>
+            <p class="switch">Уже есть аккаунт?
+                <a onclick="showLogin()">войти</a></p>
+        </div>
+
+        <p class="switch"><a href="/">← на главную</a></p>
+    </div>
+
+<script>
+function showRegister() {
+    document.getElementById('loginBox').classList.add('hidden');
+    document.getElementById('registerBox').classList.remove('hidden');
+}
+function showLogin() {
+    document.getElementById('registerBox').classList.add('hidden');
+    document.getElementById('loginBox').classList.remove('hidden');
+}
+
+// --- ВХОД ---
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const errEl = document.getElementById('loginError');
+    errEl.textContent = '';
+
+    const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            phone: form.phone.value.trim(),
+            password: form.password.value
+        })
+    });
+    const data = await res.json();
+
+    if (res.ok) {
+        window.location.href = '/cabinet';
+    } else {
+        errEl.textContent = data.error || 'Ошибка';
+    }
+});
+
+// --- РЕГИСТРАЦИЯ ---
+document.getElementById('registerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const errEl = document.getElementById('registerError');
+    errEl.textContent = '';
+
+    const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            name: form.name.value.trim(),
+            phone: form.phone.value.trim(),
+            password: form.password.value
+        })
+    });
+    const data = await res.json();
+
+    if (res.ok) {
+        window.location.href = '/cabinet';
+    } else {
+        errEl.textContent = data.error || 'Ошибка';
+    }
+});
+</script>
+</body>
+</html>

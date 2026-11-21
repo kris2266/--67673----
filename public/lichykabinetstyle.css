@@ -837,3 +837,374 @@ body {
     0%, 100% { transform: rotate(-2deg); }
     50%      { transform: rotate(2deg); }
 }
+.empty-msg {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #d1a3c1;
+    text-align: center;
+    padding: 20px 0;
+    font-style: italic;
+}
+
+.modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.5);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1000;
+    opacity: 0; visibility: hidden;
+    transition: opacity .35s ease, visibility .35s ease;
+}
+.modal-overlay.active { opacity: 1; visibility: visible; }
+
+.modal-content {
+    position: relative;
+    background: #fff; border: 8px solid #ffcce6;
+    padding: 40px; width: 90%; max-width: 500px;
+    max-height: 90vh; overflow-y: auto;
+    transform: translateY(20px);
+    transition: transform .35s cubic-bezier(.25,.8,.25,1);
+}
+.modal-overlay.active .modal-content { transform: translateY(0); }
+
+.modal-close {
+    position: absolute; top: 15px; right: 20px;
+    background: none; border: none;
+    font-size: 30px; color: #ffb3d9; cursor: pointer;
+}
+.modal-close:hover { color: #ff69b4; }
+
+.details-row {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; color: #ff69b4;
+    padding: 6px 0; text-transform: lowercase;
+}
+.details-row span {
+    font-family: Georgia, serif;
+    font-size: 14px; color: #bd83a7;
+    margin-right: 8px;
+}
+.details-img img { width: 100%; border-radius: 12px; margin-top: 15px; }
+a.profile-avatar-wrap {
+    text-decoration: none;
+    display: flex; /* на случай, если браузер сбросит */
+}
+/* Кнопка "Услуга оказана" в карточке записи (стиль как у меню) */
+.done-btn {
+    margin-top: 10px;
+    padding: 7px 30px; /* Отступы как у .menu-btn */
+    background-color: #bfbfbf; 
+    border: 2px solid #ffcce6; 
+    color: #ffffff; 
+    
+    font-family: 'Georgia', serif; 
+    font-size: 16px; /* Чуть меньше, чтобы влезло в карточку */
+    text-transform: lowercase; 
+    letter-spacing: 1px;
+    cursor: pointer;
+    
+    transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.3s ease;
+    overflow: visible;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.done-btn:hover {
+    background-color: #ff69b4; 
+    border-color: #ffffff;
+    transform: translateY(-2px);
+    animation: shootBubbles 0.6s ease-out forwards;
+}
+
+/* Копируем анимацию шариков, чтобы она работала в ЛК */
+@keyframes shootBubbles {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.7);
+    }
+    100% {
+        box-shadow: 
+            -20px -20px 0 0 rgba(255, 105, 180, 0.6),
+            20px -30px 0 0 rgba(255, 204, 230, 0.8),
+            -30px 0px 0 0 rgba(255, 105, 180, 0.5),
+            30px -10px 0 0 rgba(255, 204, 230, 0.7),
+            0px -40px 0 0 rgba(255, 105, 180, 0.4);
+    }
+}
+
+/* ================================================= */
+/* ================== АДАПТИВНОСТЬ ================== */
+/* ================================================= */
+
+/* --- ПЛАНШЕТЫ И НЕБОЛЬШИЕ ЭКРАНЫ (до 1100px) --- */
+@media (max-width: 1100px) {
+    .nav-menu {
+        gap: 50px;
+        padding: 35px 20px 10px;
+    }
+
+    .header {
+        height: 420px;
+    }
+
+    .login {
+        right: 4%;
+    }
+}
+
+/* --- ПЛАНШЕТЫ (до 900px) --- */
+@media (max-width: 900px) {
+    .header {
+        height: 360px;
+    }
+
+    .nav-menu {
+        gap: 30px;
+        padding: 30px 15px 10px;
+    }
+
+    .menu-btn {
+        padding: 7px 28px;
+        font-size: 16px;
+    }
+
+    .account-section {
+        padding: 40px 15px 60px;
+    }
+
+    .booking-item {
+        grid-template-columns: 90px 1fr auto;
+    }
+}
+
+/* --- ТЕЛЕФОНЫ (до 768px) --- */
+@media (max-width: 768px) {
+    .header {
+        height: 300px;
+    }
+
+    .logo {
+        font-size: 24vw;
+        letter-spacing: -2px;
+        text-shadow: 35px 0px 0 #ffffff;
+    }
+
+    .footer {
+        padding: 50px 0 45px;
+        min-height: 300px;
+    }
+
+    .footer-content {
+        padding: 0 25px;
+    }
+
+    /* Угловые цветы чуть меньше */
+    .flower {
+        width: 70px;
+        height: 70px;
+    }
+
+    /* Плавающие цветы меньше и реже */
+    .floating-flower,
+    .bookings-block .floating-flower,
+    .profile-card .floating-flower,
+    .footer .floating-flower {
+        width: 90px;
+        height: 90px;
+    }
+
+    /* Вращающиеся цветы на углах — компактнее */
+    .card-spin-flower {
+        width: 60px;
+        height: 60px;
+    }
+
+    .card-spin-flower-tr {
+        top: -30px;
+        right: -30px;
+    }
+
+    .card-spin-flower-bl {
+        bottom: -30px;
+        left: -30px;
+    }
+}
+
+/* --- НЕБОЛЬШИЕ ТЕЛЕФОНЫ (до 600px) --- */
+@media (max-width: 600px) {
+    .header {
+        height: 250px;
+    }
+
+    .logo {
+        font-size: 22vw;
+        text-shadow: 25px 0px 0 #ffffff;
+    }
+
+    /* Вход — компактнее */
+    .login {
+        top: 10px;
+        right: 15px;
+        font-size: 13px;
+        gap: 6px;
+    }
+
+    .user-icon {
+        width: 34px;
+        height: 34px;
+    }
+
+    /* Меню — в столбик, на всю ширину */
+    .nav-menu {
+        flex-direction: column;
+        gap: 12px;
+        padding: 25px 15px 15px;
+    }
+
+    .menu-btn {
+        width: 100%;
+        max-width: 320px;
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+    /* Личный кабинет */
+    .account-section {
+        padding: 30px 12px 50px;
+    }
+
+    .profile-card {
+        padding: 20px 15px;
+        border-width: 4px;
+    }
+
+    /* Профиль в строку — компактнее */
+    .profile-avatar-wrap {
+        width: 70px;
+        height: 70px;
+    }
+
+    .profile-avatar {
+        width: 54px;
+        height: 54px;
+    }
+
+    .profile-avatar svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    .bookings-block {
+        padding: 18px 15px;
+        border-width: 4px;
+    }
+
+    .block-title {
+        font-size: 16px;
+        padding: 7px 18px;
+    }
+
+    .master-name1 .name-gif {
+        width: 45px;
+        height: 45px;
+    }
+
+    .booking-item {
+        padding: 15px 12px;
+        gap: 12px;
+    }
+
+    .booking-name,
+    .booking-master,
+    .booking-date {
+        font-size: 16px;
+    }
+
+    .booking-price {
+        font-size: 18px;
+    }
+
+    /* Кнопка «Услуга оказана» — компактнее */
+    .done-btn {
+        padding: 8px 20px;
+        font-size: 14px;
+        white-space: normal;
+        text-align: center;
+    }
+
+    .logout-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    /* Модалка */
+    .modal-content {
+        padding: 25px 18px;
+        border-width: 6px;
+        width: 100%;
+    }
+
+    .modal-close {
+        top: 8px;
+        right: 12px;
+        font-size: 26px;
+    }
+
+    .details-row {
+        font-size: 16px;
+    }
+
+    /* Подвал */
+    .footer-line {
+        font-size: 15px;
+    }
+
+    .social-btn {
+        width: 34px;
+        height: 34px;
+    }
+
+    .social-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    /* Отключаем hover-эффекты, которых нет на тач-экранах,
+       чтобы не «залипали» после тапа */
+    .menu-btn:hover,
+    .done-btn:hover,
+    .logout-btn:hover {
+        animation: none;
+        transform: none;
+    }
+}
+
+/* --- ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 380px) --- */
+@media (max-width: 380px) {
+    .header {
+        height: 220px;
+    }
+
+    .booking-item {
+        grid-template-columns: 64px 1fr;
+    }
+
+    .booking-photo {
+        width: 64px;
+        height: 64px;
+        font-size: 14px;
+    }
+
+    .booking-price {
+        grid-column: 2;
+    }
+
+    .profile-name,
+    .profile-phone {
+        font-size: 15px;
+    }
+
+    .menu-btn {
+        font-size: 14px;
+    }
+}

@@ -800,23 +800,26 @@ body {
 
 .submit-btn {
     margin-top: 10px;
-    padding: 15px;
-    background: #ff69b4;
+    padding: 7px 40px; /* Отступы как у кнопок меню */
+    background-color: #bfbfbf; /* Серый фон */
+    border: 2px solid #ffcce6; /* Розовая рамка */
     color: #ffffff;
-    border: none;
+    
     font-family: 'Georgia', serif;
     font-size: 18px;
     text-transform: lowercase;
     letter-spacing: 1px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 0;
+    
+    transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.3s ease;
+    overflow: visible;
 }
 
 .submit-btn:hover {
-    background: #d63384;
+    background-color: #ff69b4; 
+    border-color: #ffffff;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(214, 51, 132, 0.4);
+    animation: shootBubbles 0.6s ease-out forwards;
 }
 
 /* ================================================= */
@@ -1590,4 +1593,134 @@ body {
 @keyframes titleBreathe {
     0% { transform: scale(1); }
     100% { transform: scale(1.03); }
+}
+/* ================================================= */
+/* ========= ДОПОЛНИТЕЛЬНАЯ АДАПТИВНОСТЬ =========== */
+/* ================================================= */
+
+@media (max-width: 1100px) {
+    .nav-menu { gap: 50px; }
+    .login { right: 4%; }
+}
+
+@media (max-width: 900px) {
+    .header { height: 400px; }
+    .menu-btn { padding: 7px 25px; font-size: 16px; }
+    .login { right: 15px; }
+    .floating-flower { width: 140px; height: 140px; }
+}
+
+@media (max-width: 768px) {
+    .logo { text-shadow: 40px 0 0 #ffffff; }
+    .user-icon { width: 40px; height: 40px; }
+
+    .nav-menu {
+        padding: 30px 10px 10px;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .map-wrapper { width: 94%; }
+    .map-wrapper .map-container { height: 320px; }
+    .header-title { padding: 8px 25px; }
+
+    .modal-content { padding: 25px; }
+    .modal-title { font-size: 24px; }
+
+    .portfolio-title {
+        font-size: 34px;
+        letter-spacing: 4px;
+        margin-bottom: 50px;
+    }
+}
+
+@media (max-width: 600px) {
+    .header { height: 300px; }
+
+    /* меню — столбик кнопок на всю ширину */
+    .nav-menu {
+        flex-direction: column;
+        gap: 12px;
+        padding: 25px 15px 15px;
+    }
+    .menu-btn { width: 100%; max-width: 320px; font-size: 16px; padding: 7px 20px; }
+
+    .login { top: 10px; right: 10px; font-size: 13px; }
+    .user-icon { width: 36px; height: 36px; }
+    .flower { width: 60px; height: 60px; }
+
+    /* рамки секций — тоньше и компактнее */
+    .history-frame,
+    .map-frame,
+    .franchise-frame,
+    .reviews-frame { border-width: 8px; }
+    .history-frame, .franchise-frame { padding: 25px 15px 40px; }
+    .map-frame { padding: 25px 15px 40px; }
+    .reviews-frame { padding: 25px 15px 35px; }
+
+    .history-caption,
+    .map-caption,
+    .franchise-caption {
+        font-size: 15px;
+        padding: 9px 12px;
+        letter-spacing: 0.5px;
+    }
+
+    .history-photo { height: 170px; }
+    .map-frame .map-container { height: 240px; }
+    .franchise-photo { flex: 0 0 calc(50% - 8px); }
+
+    /* отзывы */
+    .review-card { padding: 15px 15px 14px; }
+    .review-card-header { flex-wrap: wrap; }
+    .reviews-write-btn { width: 100%; padding: 12px 30px; }
+
+    /* модалка */
+    .modal-content { padding: 20px; border-width: 6px; }
+    .modal-title { font-size: 22px; margin-bottom: 20px; }
+    .submit-btn { width: 100%; }
+
+    /* адреса и контакты */
+    .map-wrapper { padding: 6px; border-width: 6px; }
+    .map-wrapper .map-container { height: 240px; }
+    .header-title { font-size: 16px; padding: 8px 25px; }
+    .pill-btn { font-size: 17px; }
+    .social-grid { flex-wrap: wrap; justify-content: center; }
+
+    /* подвал */
+    .footer { padding: 50px 0 40px; min-height: 280px; }
+    .footer-content { padding: 0 20px; }
+    .footer-line { font-size: 14px; line-height: 1.7; }
+
+    .portfolio-title { font-size: 26px; letter-spacing: 3px; }
+}
+
+@media (max-width: 380px) {
+    .menu-btn { font-size: 15px; padding: 6px 15px; }
+    .franchise-photo { flex: 0 0 100%; }
+    .footer-line { font-size: 13px; }
+    .history-title, .reviews-title { height: 54px; }
+    .history-title text,
+    .reviews-title text { font-size: 40px; }
+    .map-wrapper .map-container { height: 200px; }
+}
+
+/* длинные тексты не вылезают за рамки */
+.review-text,
+.footer-line,
+.franchise-caption {
+    overflow-wrap: break-word;
+}
+
+/* на тач-экранах «шарики» не залипают после тапа */
+@media (hover: none) {
+    .menu-btn:hover,
+    .submit-btn:hover,
+    .reviews-write-btn:hover {
+        animation: none;
+    }
+    .social-btn:hover,
+    .social-item:hover .social-icon {
+        transform: none;
+    }
 }

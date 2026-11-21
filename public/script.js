@@ -1,20 +1,25 @@
-(function() {
+(function () {
     // ===== НАСТРОЙКИ =====
     const monthNames = [
         'january', 'february', 'march', 'april', 'may', 'june',
         'july', 'august', 'september', 'october', 'november', 'december'
     ];
-    // Текущая дата (для демонстрации — ноябрь 2026)
-    let currentYear = 2026;
-    let currentMonth = 10; // 0 = январь, 10 = ноябрь
+    const ruMonths = [
+        'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
+        'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'
+    ];
 
-    // Занятые слоты (день месяца → массив временных меток)
-    const busySlots = {
-        5: ['16:00', '18:00'],
-        14: ['18:00']
-    };
+    // Все возможные часы (должны совпадать с <select id="booking-time"> в HTML)
+    const ALL_TIMES = ['10:00', '12:00', '14:00', '16:00', '18:00', '20:00'];
 
-    // ===== DOM ЭЛЕМЕНТЫ =====
+    const now = new Date();
+    let currentYear = now.getFullYear();
+    let currentMonth = now.getMonth();
+
+    // Занятые слоты: { "YYYY-MM-DD": ["16:00", "18:00"], ... }
+    let busySlots = {};
+
+    // ===== DOM =====
     const grid = document.getElementById('calendarGrid');
     const monthLabel = document.getElementById('monthLabel');
     const modal = document.getElementById('bookingModal');
@@ -22,80 +27,183 @@
     const closeBtn = document.querySelector('.modal-close');
     const bookingForm = document.querySelector('.booking-form');
 
-    // ===== ГЕНЕРАЦИЯ КАЛЕНДАРЯ =====
+    function getServiceMeta(serviceName) {
+        const all = window.SERVICES || {};
+        return all[serviceName] || {};
+    }
+
+    // ===== УТИЛИТЫ ДАТ =====
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function parseBookingDate(str) {
+        if (!str) return null;
+        str = String(str).trim();
+
+        // ISO: 2026-11-21
+        let m = str.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+        if (m) return { y: +m[1], m: +m[2], d: +m[3] };
+
+        // "21 november" / "21 ноября"
+        m = str.match(/^(\d{1,2})\s+([a-zа-я]+)$/i);
+        if (m) {
+            const day = +m[1];
+            const name = m[2].toLowerCase();
+            const idx = monthNames.indexOf(name);
+            const ruIdx = ruMonths.indexOf(name);
+            const monthIdx = idx >= 0 ? idx : ruIdx;
+            if (monthIdx >= 0) return { y: currentYear, m: monthIdx + 1, d: day };
+        }
+        return null;
+    }
+
+    function toISO(y, m, d) {
+        return `${y}-${pad(m)}-${pad(d)}`;
+    }
+
+    function isPast(y, m, d) {
+        const today = new Date();
+        const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        const target = new Date(y, m - 1, d);
+        return target < todayStart;
+    }
+
+    // Достаёт ISO-дату из поля даты независимо от его типа
+    function getDateInputISO() {
+        const dateInput = document.getElementById('booking-date-input');
+        if (!dateInput) return null;
+        if (dateInput.type === 'date') return dateInput.value || null;
+        const parsed = parseBookingDate(dateInput.value);
+        return parsed ? toISO(parsed.y, parsed.m, parsed.d) : null;
+    }
+
+    // Заполняет <select id="booking-time"> свободными часами на дату
+    function fillFreeTimes(isoDate) {
+        const timeSelect = document.getElementById('booking-time');
+        if (!timeSelect) return;
+
+        const busy = busySlots[isoDate] || [];
+        const prevValue = timeSelect.value;
+        timeSelect.innerHTML = '<option value="" disabled selected>выберите время</option>';
+
+        ALL_TIMES.forEach(t => {
+            if (busy.includes(t)) return;
+            const opt = document.createElement('option');
+            opt.value = t;
+            opt.textContent = t;
+            timeSelect.appendChild(opt);
+        });
+
+        if (prevValue && !busy.includes(prevValue)) {
+            timeSelect.value = prevValue;
+        }
+
+        if (timeSelect.options.length <= 1) {
+            const opt = document.createElement('option');
+            opt.value = "";
+            opt.disabled = true;
+            opt.textContent = 'нет свободного времени';
+            timeSelect.appendChild(opt);
+        }
+    }
+
+       // ===== ЗАГРУЗКА ЗАНЯТЫХ СЛОТОВ =====
+    async function loadBusySlots() {
+        try {
+            const res = await fetch('/api/bookings', { credentials: 'same-origin' });
+            if (!res.ok) return;
+            const data = await res.json();
+            const all = []
+                .concat(Array.isArray(data) ? data : [])
+                .concat(data.active || [])
+                .concat(data.done || [])
+                .concat(data.allBusy || []); // <--- ДОБАВИТЬ ЭТО
+
+            busySlots = {};
+            all.forEach(b => {
+                const parsed = parseBookingDate(b.booking_date);
+                if (!parsed) return;
+                const key = toISO(parsed.y, parsed.m, parsed.d);
+                if (!busySlots[key]) busySlots[key] = [];
+                const time = b.booking_time || b.time;
+                if (time && !busySlots[key].includes(time)) {
+                    busySlots[key].push(time);
+                }
+            });
+        } catch (e) {
+            // тихо игнорируем
+        }
+    }
+
+    // ===== РЕНДЕР КАЛЕНДАРЯ =====
     function renderCalendar() {
-        // Удаляем все ячейки, кроме заголовков дней недели (первые 7)
+        if (!grid) return;
+
         const headers = Array.from(grid.children).slice(0, 7);
         grid.innerHTML = '';
         headers.forEach(h => grid.appendChild(h));
 
-        // Название месяца
-        monthLabel.textContent = monthNames[currentMonth];
+        if (monthLabel) monthLabel.textContent = monthNames[currentMonth];
 
-        // Первый день месяца (0 = воскресенье, 1 = понедельник, ...)
         const firstDay = new Date(currentYear, currentMonth, 1).getDay();
-        // Приводим к понедельнику как первому дню (0 = пн, 6 = вс)
         const offset = (firstDay === 0) ? 6 : firstDay - 1;
-
-        // Количество дней в месяце
         const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
-        // Пустые ячейки для выравнивания
         for (let i = 0; i < offset; i++) {
             const empty = document.createElement('div');
             empty.className = 'calendar-cell';
             grid.appendChild(empty);
         }
 
-        // Ячейки с днями
         for (let day = 1; day <= daysInMonth; day++) {
             const cell = document.createElement('div');
             cell.className = 'calendar-cell';
             cell.dataset.day = day;
 
-            // Бледная цифра
             const num = document.createElement('span');
             num.className = 'day-number';
             num.textContent = day;
             cell.appendChild(num);
 
-            // Существующие записи
-            if (busySlots[day]) {
-                busySlots[day].forEach((time, idx) => {
-                    const slot = document.createElement('div');
-                    slot.className = 'appointment-slot';
-                    slot.textContent = time;
-                    slot.style.top = (30 + idx * 30) + '%';
-                    cell.appendChild(slot);
-                });
-            }
+            const iso = toISO(currentYear, currentMonth + 1, day);
+            const busy = busySlots[iso] || [];
+            const past = isPast(currentYear, currentMonth + 1, day);
 
-            // ===== ОБРАБОТЧИК КЛИКА ПО ДНЮ =====
-            cell.addEventListener('click', function(e) {
-                // Не открываем, если кликнули по слоту записи
-                if (e.target.classList.contains('appointment-slot')) return;
+            if (past) cell.classList.add('calendar-cell--past');
 
-                // Проверяем, есть ли уже записи
-                if (busySlots[day]) return; // занято — не открываем
-
-                const dateText = day + ' ' + monthNames[currentMonth];
-
-                // Показываем дату в модалке
-                modalDateSpan.textContent = dateText;
-
-                // Автоподстановка даты в поле формы
-                const dateInput = document.getElementById('booking-date-input');
-                if (dateInput) {
-                    dateInput.value = dateText;
-                }
-
-                modal.classList.add('active');
+            busy.forEach((time, idx) => {
+                const slot = document.createElement('div');
+                slot.className = 'appointment-slot';
+                slot.textContent = time;
+                slot.style.top = (30 + idx * 22) + '%';
+                cell.appendChild(slot);
             });
+
+            const fullyBusy = past || busy.length >= ALL_TIMES.length;
+
+            if (!fullyBusy) {
+                cell.addEventListener('click', function (e) {
+                    if (e.target.classList.contains('appointment-slot')) return;
+                    if (!modal) return;
+
+                    const dateText = day + ' ' + monthNames[currentMonth];
+                    if (modalDateSpan) modalDateSpan.textContent = dateText;
+
+                    const dateInput = document.getElementById('booking-date-input');
+                    if (dateInput) {
+                        dateInput.value = (dateInput.type === 'date') ? iso : dateText;
+                    }
+
+                    fillFreeTimes(iso);
+
+                    modal.classList.add('active');
+                });
+            } else {
+                cell.classList.add('calendar-cell--past');
+            }
 
             grid.appendChild(cell);
         }
 
-        // Добавляем пустые ячейки в конце для красоты (опционально)
         const totalCells = offset + daysInMonth;
         const remainder = totalCells % 7;
         if (remainder !== 0) {
@@ -107,25 +215,153 @@
         }
     }
 
-    // ===== ЗАКРЫТИЕ МОДАЛЬНОГО ОКНА =====
-    closeBtn.addEventListener('click', () => {
-        modal.classList.remove('active');
-    });
+    // ===== КНОПКИ «записаться» НА КАРТОЧКАХ УСЛУГ =====
+    function bindServiceButtons() {
+        document.querySelectorAll('.service-book-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                const card = btn.closest('.service-card');
+                const serviceName = card ? card.dataset.service : null;
+                const serviceSelect = document.getElementById('service-select');
 
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('active');
+                if (serviceName && serviceSelect) {
+                    let found = false;
+                    Array.from(serviceSelect.options).forEach(function (opt) {
+                        if (opt.value === serviceName || opt.textContent.trim() === serviceName) {
+                            serviceSelect.value = opt.value;
+                            found = true;
+                        }
+                    });
+                    if (!found) {
+                        const opt = document.createElement('option');
+                        opt.value = serviceName;
+                        opt.textContent = serviceName;
+                        serviceSelect.appendChild(opt);
+                        serviceSelect.value = serviceName;
+                    }
+                }
+
+                const dateInput = document.getElementById('booking-date-input');
+                if (dateInput && !dateInput.value) {
+                    const today = new Date();
+                    const iso = toISO(today.getFullYear(), today.getMonth() + 1, today.getDate());
+                    dateInput.value = (dateInput.type === 'date')
+                        ? iso
+                        : today.getDate() + ' ' + monthNames[today.getMonth()];
+                    if (modalDateSpan) modalDateSpan.textContent = dateInput.value;
+                }
+
+                // Обновляем список времён под текущую дату (работает и для type="text")
+                const currentISO = getDateInputISO();
+                if (currentISO) fillFreeTimes(currentISO);
+
+                if (modal) modal.classList.add('active');
+            });
+        });
+    }
+
+    function bindModalClose() {
+        if (closeBtn && modal) {
+            closeBtn.addEventListener('click', () => modal.classList.remove('active'));
         }
-    });
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) modal.classList.remove('active');
+            });
+        }
+    }
 
-    // ===== ОБРАБОТКА ФОРМЫ =====
-    bookingForm.addEventListener('submit', function(e) {
+    // ===== ОТПРАВКА ФОРМЫ =====
+    async function handleBookingSubmit(e) {
         e.preventDefault();
-        alert('Спасибо за запись! Ваша заявка отправлена администратору.');
-        modal.classList.remove('active');
-        this.reset();
-    });
+
+        const meRes = await fetch('/api/me', { credentials: 'same-origin' });
+        if (!meRes.ok) { window.location.href = '/login.html'; return; }
+
+        const serviceName = (document.getElementById('service-select') || {}).value || '';
+        const meta = getServiceMeta(serviceName);
+
+        const payload = {
+            service: serviceName,
+            master: (document.getElementById('master-select') || {}).value || '',
+            address: (document.getElementById('booking-address') || {}).value || '',
+            booking_date: (document.getElementById('booking-date-input') || {}).value || '',
+            booking_time: (document.getElementById('booking-time') || {}).value || '',
+            client_name: (document.getElementById('client-name') || {}).value || '',
+            client_phone: (document.getElementById('client-phone') || {}).value || '',
+            price: meta.price || 0,
+            image: meta.image || null
+        };
+
+        const required = ['service', 'master', 'address', 'booking_date', 'booking_time', 'client_name', 'client_phone'];
+        if (required.some(k => !payload[k])) {
+            alert('Заполните все поля');
+            return;
+        }
+
+        const parsed = parseBookingDate(payload.booking_date);
+        if (parsed && isPast(parsed.y, parsed.m, parsed.d)) {
+            alert('Нельзя записаться на прошедшую дату');
+            return;
+        }
+
+        if (parsed) {
+            const iso = toISO(parsed.y, parsed.m, parsed.d);
+            const busy = busySlots[iso] || [];
+            if (busy.includes(payload.booking_time)) {
+                alert('Это время уже занято, выберите другое');
+                fillFreeTimes(iso);
+                return;
+            }
+        }
+
+        const res = await fetch('/api/bookings', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify(payload)
+        });
+
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+            alert(data.error || 'Не удалось создать запись');
+            return;
+        }
+
+        alert('спасибо за запись! заявка отправлена');
+        if (modal) modal.classList.remove('active');
+        if (bookingForm) bookingForm.reset();
+
+        await loadBusySlots();
+        renderCalendar();
+    }
+
+    function bindBookingForm() {
+        if (!bookingForm) return;
+        if (bookingForm.dataset.submitBound === "1") return;
+        bookingForm.dataset.submitBound = "1";
+        bookingForm.addEventListener('submit', handleBookingSubmit);
+    }
 
     // ===== ИНИЦИАЛИЗАЦИЯ =====
-    renderCalendar();
+    async function init() {
+        // Ограничение min для type="date" — локальная дата
+        const dateInput = document.getElementById('booking-date-input');
+        if (dateInput && dateInput.type === 'date') {
+            const d = new Date();
+            dateInput.min = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+        }
+
+        if (grid) {
+            await loadBusySlots();
+            renderCalendar();
+        }
+
+        if (modal) {
+            bindServiceButtons();
+            bindModalClose();
+            bindBookingForm();
+        }
+    }
+
+    init();
 })();

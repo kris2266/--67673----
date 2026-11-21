@@ -1015,3 +1015,303 @@ body {
     border-color: #ffffff;
     animation: shootBubbles 0.6s ease-out forwards;
 }
+
+/* ================================================= */
+/* ============ ДОПОЛНИТЕЛЬНАЯ АДАПТИВНОСТЬ ========= */
+/* ================================================= */
+
+/* --- ПЛАНШЕТЫ (до 1100px) --- */
+@media (max-width: 1100px) {
+    .nav-menu {
+        gap: 50px;
+    }
+
+    .login {
+        right: 5%;
+    }
+}
+
+/* --- ПЛАНШЕТЫ (до 900px) --- */
+@media (max-width: 900px) {
+    .header {
+        height: 400px;
+    }
+
+    .nav-menu {
+        padding: 35px 15px 10px;
+    }
+
+    .menu-btn {
+        padding: 7px 28px;
+        font-size: 17px;
+    }
+
+    /* Фоновые цветы — чуть мельче, чтобы не забивали контент */
+    .floating-flower {
+        width: 130px;
+        height: 130px;
+    }
+
+    .footer .floating-flower {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+/* --- БОЛЬШИЕ ТЕЛЕФОНЫ И УЗКИЕ ПЛАНШЕТЫ (до 768px) --- */
+@media (max-width: 768px) {
+    .header {
+        height: 360px;
+    }
+
+    .nav-menu {
+        padding: 30px 15px 10px;
+        gap: 30px;
+    }
+
+    .menu-btn {
+        padding: 6px 25px;
+        font-size: 16px;
+    }
+
+    /* Мельче: угловые и вращающиеся цветы */
+    .flower {
+        width: 70px;
+        height: 70px;
+    }
+
+    .education-flower,
+    .master-card .card-spin-flower {
+        width: 60px;
+        height: 60px;
+    }
+
+    .education-flower {
+        top: -22px;
+        right: -16px;
+    }
+
+    .master-card .card-spin-flower-tr {
+        top: -30px;
+        right: -30px;
+    }
+
+    .master-card .card-spin-flower-br {
+        bottom: -30px;
+        left: -30px;
+    }
+
+    /* Блок «мастера» */
+    .masters-section {
+        padding: 45px 15px 60px;
+    }
+
+    .masters-header {
+        gap: 12px;
+        margin-bottom: 40px;
+    }
+
+    .masters-title svg {
+        height: 60px;
+    }
+
+    .header-flower {
+        width: 60px;
+        height: 60px;
+    }
+
+    .master-card {
+        padding: 20px 15px;
+        gap: 16px;
+    }
+
+    .master-name {
+        font-size: 16px;
+        gap: 8px;
+    }
+
+    .name-gif {
+        width: 28px;
+        height: 28px;
+    }
+
+    .master-photo {
+        height: 260px;
+    }
+
+    .master-works {
+        gap: 10px;
+    }
+
+    .master-description {
+        font-size: 18px;
+        overflow-wrap: break-word;
+    }
+
+    .course-name,
+    .work-thumb {
+        font-size: 15px;
+    }
+
+    /* Модалка */
+    .modal-content {
+        padding: 25px 20px;
+        border-width: 6px;
+    }
+
+    .modal-title {
+        font-size: 22px;
+    }
+
+    .submit-btn {
+        font-size: 16px;
+    }
+}
+
+/* --- ТЕЛЕФОНЫ (до 600px) --- */
+@media (max-width: 600px) {
+    .header {
+        height: 300px;
+    }
+
+    /* Логотип и тень под него мельче */
+    .logo,
+    .footer-logo {
+        letter-spacing: -2px;
+        text-shadow: 25px 0 0 #ffffff;
+    }
+
+    /* Логин компактнее, чтобы не задевал лого */
+    .login {
+        right: 4%;
+        top: 10px;
+        font-size: 13px;
+    }
+
+    .user-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    /* Меню — столбик кнопок на всю ширину */
+    .nav-menu {
+        flex-wrap: wrap;
+        gap: 15px;
+        padding: 25px 10px 10px;
+    }
+
+    .menu-btn {
+        width: 90%;
+        max-width: 320px;
+        padding: 9px 10px;
+        font-size: 15px;
+        white-space: normal;
+    }
+
+    /* Секция обучения */
+    .education-section {
+        border-width: 6px;
+        padding: 20px 15px 30px;
+        margin: 40px auto;
+    }
+
+    .header-title {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+
+    .education-flower {
+        width: 50px;
+        height: 50px;
+        top: -18px;
+        right: -12px;
+    }
+
+    /* Блок «мастера» */
+    .masters-title svg {
+        height: 48px;
+    }
+
+    .master-photo {
+        width: 100%;
+        height: 220px;
+    }
+
+    .master-name,
+    .master-book-btn {
+        width: 100%;
+    }
+
+    .master-description {
+        font-size: 17px;
+    }
+
+    /* Заголовок модалки: даём перенос, чтобы длинное имя не вылезало */
+    .master-name1 .modal-title {
+        white-space: normal;
+    }
+
+    .master-name1 .name-gif {
+        width: 28px;
+        height: 28px;
+    }
+
+    .modal-title {
+        font-size: 20px;
+    }
+
+    /* Подвал */
+    .footer {
+        padding: 50px 0 40px;
+    }
+
+    .footer-content {
+        padding: 0 20px;
+    }
+
+    .footer-line {
+        font-size: 15px;
+        line-height: 1.8;
+    }
+
+    .footer .floating-flower {
+        width: 90px;
+        height: 90px;
+    }
+}
+
+/* --- МАЛЕНЬКИЕ ТЕЛЕФОНЫ (до 380px) --- */
+@media (max-width: 380px) {
+    .menu-btn {
+        font-size: 14px;
+        letter-spacing: 0;
+    }
+
+    .master-photo {
+        height: 180px;
+    }
+
+    .work-thumb {
+        font-size: 13px;
+    }
+
+    .footer-line {
+        font-size: 14px;
+    }
+
+    .footer .flower {
+        width: 55px;
+        height: 55px;
+    }
+}
+
+/* --- Тач-экраны: отключаем hover-эффекты, чтобы не «залипали» после тапа --- */
+@media (hover: none) {
+    .menu-btn:hover,
+    .master-book-btn:hover,
+    .submit-btn:hover,
+    .work-thumb:hover {
+        animation: none;
+        transform: none;
+    }
+}

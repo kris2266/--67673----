@@ -21,11 +21,10 @@
 
         <div class="logo">HANDY</div>
 
-        <a href="#" class="login">
-            <span class="user-icon"></span>
-            <span>ВОЙТИ</span>
-        </a>
-
+        <a href="/login.html" class="login" style="visibility: hidden;">
+    <span class="user-icon"></span>
+    <span class="login-text">ВОЙТИ</span>
+</a>
         <div class="flower flower-left"></div>
         <div class="flower flower-right"></div>
     </header>
@@ -392,12 +391,28 @@
                 <!-- Поле даты -->
                 <div class="form-group">
                     <label for="booking-date">Дата</label>
-                    <input type="date" id="booking-date" required>
+                    <input type="date" id="booking-date-input" required>
                 </div>
-                            <div class="form-group">
-                <label for="booking-address">Адрес</label>
-                <input type="text" id="booking-address" placeholder="г. Москва, ул. ..." required>
-            </div>
+                <div class="form-group">
+    <label for="booking-time">Время</label>
+    <select id="booking-time" required>
+        <option value="" disabled selected>выберите время</option>
+        <option value="10:00">10:00</option>
+        <option value="12:00">12:00</option>
+        <option value="14:00">14:00</option>
+        <option value="16:00">16:00</option>
+        <option value="18:00">18:00</option>
+        <option value="20:00">20:00</option>
+    </select>
+</div>
+                      <div class="form-group">
+    <label for="booking-address">Адрес</label>
+    <select id="booking-address" required>
+        <option value="" disabled selected>выберите адрес</option>
+        <option value="г. Москва, ул. Московская 67">г. Москва, ул. Московская 67</option>
+        <option value="г. Москва, ул. Арбатская 52">г. Москва, ул. Арбатская 52</option>
+    </select>
+</div>
 
                 <div class="form-group">
                     <label for="client-name">Ваше имя</label>
@@ -459,7 +474,8 @@
         </div>
     </div>
 </footer>
-
+<script src="servicedata.js"></script>
     <script src="masters.js"></script>
+    <script src="widjet.js"></script>
 </body>
 </html>
