@@ -1,4 +1,3 @@
-/* --- СБРОС И ОБЩИЕ СТИЛИ --- */
 * {
     margin: 0;
     padding: 0;
@@ -9,35 +8,30 @@ body {
     font-family: 'Cormorant Garamond', serif;
 }
 
-/* ================================================= */
-/* =================== ШАПКА (HEADER) =============== */
-/* ================================================= */
-
 .header {
     width: 100%;
-    height: 500px; 
+    height: clamp(220px, 40vw, 500px);
     background: #ffdbf7;
     position: relative;
     overflow: hidden;
 }
 
-/* --- АНИМАЦИЯ ФОНА (ЦВЕТЫ) --- */
 .bg-animation {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; 
+    z-index: 1;
     pointer-events: none;
 }
 
 .floating-flower {
     position: absolute;
     bottom: -150px;
-    width: 180px;
-    height: 180px;
-    background-image: url('photos/flower.svg'); 
+    width: clamp(90px, 12vw, 180px);
+    height: clamp(90px, 12vw, 180px);
+    background-image: url('photos/flower.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -48,68 +42,65 @@ body {
 }
 
 @keyframes floatUp {
-    0% { transform: translateY(0) translateX(0) rotate(0deg) scale(0.8); opacity: 0; }
-    10% { opacity: 0.4; }
-    50% { transform: translateY(-300px) translateX(40px) rotate(45deg) scale(1.1); opacity: 0.5; }
-    90% { opacity: 0.4; }
+    0%   { transform: translateY(0) translateX(0) rotate(0deg) scale(0.8); opacity: 0; }
+    10%  { opacity: 0.4; }
+    50%  { transform: translateY(-300px) translateX(40px) rotate(45deg) scale(1.1); opacity: 0.5; }
+    90%  { opacity: 0.4; }
     100% { transform: translateY(-600px) translateX(-40px) rotate(90deg) scale(0.9); opacity: 0; }
 }
 
-/* --- ЛОГОТИП HANDY --- */
 .logo {
     position: absolute;
-    top: 50%; 
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scaleY(2);
     font-family: 'Cormorant Garamond', "Times New Roman", serif;
-    font-size: 27vw; 
-    font-weight: 300; 
-    letter-spacing: -3px; 
-    line-height: 0.8; 
+    font-size: clamp(72px, 27vw, 420px);
+    font-weight: 300;
+    letter-spacing: clamp(-3px, -0.3vw, -2px);
+    line-height: 0.8;
     color: #c4c4c4;
     white-space: nowrap;
-    text-shadow: 75px 0px 0 #ffffff; 
+    text-shadow: clamp(25px, 7vw, 75px) 0 0 #ffffff;
     z-index: 2;
     animation: breathe 4s ease-in-out infinite alternate;
 }
 
 @keyframes breathe {
-    0% { transform: translate(-50%, -50%) scaleY(2) scaleX(1); }
+    0%   { transform: translate(-50%, -50%) scaleY(2) scaleX(1); }
     100% { transform: translate(-50%, -50%) scaleY(2.05) scaleX(1.02); }
 }
 
-/* --- ВХОД (ЛОГИН) --- */
 .login {
     position: absolute;
-    top: 15px;
-    right: 9%;
+    top: clamp(10px, 1.5vw, 15px);
+    right: clamp(4%, 9%, 9%);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: clamp(6px, 0.8vw, 8px);
     color: #bd83a7;
     text-decoration: none;
     font-family: Georgia, serif;
-    font-size: 15px;
+    font-size: clamp(13px, 1.2vw, 15px);
     z-index: 5;
 }
 
 .user-icon {
     display: block;
-    width: 50px;
-    height: 50px;
-    background-image: url('photos/user-icon.svg'); 
+    width: clamp(34px, 4vw, 50px);
+    height: clamp(34px, 4vw, 50px);
+    background-image: url('photos/user-icon.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
 }
 
-/* --- УГЛОВЫЕ ЦВЕТЫ ШАПКИ --- */
 .flower {
     position: absolute;
-    width: 100px;
-    height: 100px;
+    width: clamp(70px, 9vw, 100px);
+    height: clamp(70px, 9vw, 100px);
     z-index: 4;
-    background-image: url('photos/flower.svg'); 
+    background-image: url('photos/flower.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -118,222 +109,38 @@ body {
 .flower-left { top: -5px; left: 2px; }
 .flower-right { bottom: -5px; right: 0; }
 
-/* ================================================= */
-/* =================== МЕНЮ (NAV) ================== */
-/* ================================================= */
-
 .nav-menu {
-    position: static;            
-    transform: none;             
     width: 100%;
-    background: #ffffff;         
-    padding: 45px 0 10px;
-
+    background: #ffffff;
+    padding: clamp(25px, 4vw, 45px) 0 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 120px;                  
+    gap: clamp(20px, 9vw, 120px);
     z-index: 10;
 }
 
 .menu-btn {
     position: relative;
-    
     display: flex;
     align-items: center;
     justify-content: center;
-    
-    padding: 7px 40px; 
-    background-color: #bfbfbf; 
-    border: 2px solid #ffcce6; 
-    color: #ffffff; 
-    
-    font-family: 'Georgia', serif; 
-    font-size: 18px;
-    text-transform: lowercase; 
+    padding: clamp(8px, 0.9vw, 10px) clamp(20px, 3.5vw, 40px);
+    background-color: #bfbfbf;
+    border: 2px solid #ffcce6;
+    color: #ffffff;
+    font-family: 'Georgia', serif;
+    font-size: clamp(14px, 1.6vw, 18px);
+    text-transform: lowercase;
     text-decoration: none;
     letter-spacing: 1px;
-    
-    white-space: nowrap; 
-    
+    white-space: nowrap;
     transition: background-color 0.4s ease, border-color 0.4s ease;
-    overflow: visible; 
-}
-
-.menu-btn:hover {
-    background-color: #ff69b4; 
-    border-color: #ffffff;
-    animation: shootBubbles 0.6s ease-out forwards;
-}
-
-/* --- АНИМАЦИЯ ШАРИКОВ --- */
-@keyframes shootBubbles {
-    0% {
-        box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.7);
-    }
-    100% {
-        box-shadow: 
-            -20px -20px 0 0 rgba(255, 105, 180, 0.6),
-            20px -30px 0 0 rgba(255, 204, 230, 0.8),
-            -30px 0px 0 0 rgba(255, 105, 180, 0.5),
-            30px -10px 0 0 rgba(255, 204, 230, 0.7),
-            0px -40px 0 0 rgba(255, 105, 180, 0.4);
-    }
-}
-/* ================================================= */
-/* ============ БЛОК «ЛИЧНЫЙ КАБИНЕТ» =============== */
-/* ================================================= */
-
-.account-section {
-    width: 100%;
-    background: #ffffff;
-    padding: 60px 20px 80px;
-    display: flex;
-    justify-content: center;
-}
-
-.account-layout {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 30px;
-    width: 100%;
-    max-width: 1200px;
-    align-items: start;
-}
-
-/* --- ЛЕВАЯ КОЛОНКА: ПРОФИЛЬ --- */
-.profile-card {
-    background: #ffffff;
-    border: 6px solid #ffcce6;
-    padding: 30px 25px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    position: sticky;
-    top: 20px;
-}
-
-.profile-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    width: 100%;
-}
-
-.profile-avatar {
-    width: 45px;
-    height: 45px;
-    background: #bd83a7;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.profile-avatar svg {
-    width: 28px;
-    height: 28px;
-    fill: #ffffff;
-}
-
-.profile-name {
-    font-family: 'Georgia', serif;
-    font-size: 18px;
-    color: #bd83a7;
-    text-transform: lowercase;
-    letter-spacing: 1px;
-}
-
-.profile-phone {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    color: #bd83a7;
-    text-decoration: none;
-    text-align: center;
-    transition: color 0.3s ease;
-}
-
-.profile-phone:hover {
-    color: #ff69b4;
-}
-
-.logout-btn {
-    width: 100%;
-    padding: 12px 30px;
-    background: #bfbfbf;
-    border: 2px solid #ffcce6;
-    
-    font-family: 'Georgia', serif;
-    font-size: 16px;
-    color: #ffffff;
-    text-transform: lowercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    
-    transition: all 0.3s ease;
-}
-
-.logout-btn:hover {
-    background: #ff69b4;
-    border-color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
-}
-
-/* --- ПРАВАЯ КОЛОНКА: ЗАПИСИ --- */
-.account-content {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
-.bookings-block {
-    background: #ffffff;
-    border: 6px solid #ffcce6;
-    padding: 25px;
-}
-
-.block-title {
-    display: inline-block;
-    padding: 8px 25px;
-    background: #bfbfbf;
-    border: 2px solid #ffcce6;
-    
-    font-family: 'Georgia', serif;
-    font-size: 18px;
-    color: #ffffff;
-    text-transform: lowercase;
-    letter-spacing: 1px;
-    margin: 0 0 25px 0;
-}
-
-.bookings-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-/* --- ОТДЕЛЬНАЯ ЗАПИСЬ --- */
-.booking-item {
-    background: #ffffff;
-    border: 4px solid #ffcce6;
-    padding: 20px;
-    display: grid;
-    grid-template-columns: 100px 1fr auto;
-    gap: 20px;
-    align-items: center;
-    
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.logout-btn {
     overflow: visible;
 }
 
-.logout-btn:hover {
-    background: #ff69b4;
+.menu-btn:hover {
+    background-color: #ff69b4;
     border-color: #ffffff;
     animation: shootBubbles 0.6s ease-out forwards;
 }
@@ -352,399 +159,99 @@ body {
     }
 }
 
-.booking-photo {
-    width: 100px;
-    height: 100px;
-    background: #d3d3d3;
-    border-radius: 15px;
-    
+.account-section {
+    width: 100%;
+    background: #ffffff;
+    padding: clamp(30px, 5vw, 60px) clamp(12px, 2vw, 20px) clamp(50px, 7vw, 80px);
     display: flex;
-    align-items: center;
     justify-content: center;
-    
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    color: #000000;
-    text-transform: lowercase;
-    
-    overflow: hidden;
 }
 
-.booking-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 15px;
-}
-
-.booking-info {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.booking-name,
-.booking-master,
-.booking-date {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    color: #ff69b4;
-    text-transform: lowercase;
-    margin: 0;
-    line-height: 1.3;
-}
-
-.booking-price {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    color: #ff69b4;
-    text-transform: lowercase;
-    white-space: nowrap;
-}
-
-/* --- АДАПТИВ --- */
-@media (max-width: 900px) {
-    .account-layout {
-        grid-template-columns: 1fr;
-    }
-    
-    .profile-card {
-        position: static;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    
-    .profile-info {
-        width: auto;
-    }
-    
-    .profile-phone {
-        width: auto;
-    }
-    
-    .logout-btn {
-        width: auto;
-    }
-}
-
-@media (max-width: 600px) {
-    .booking-item {
-        grid-template-columns: 80px 1fr;
-        gap: 15px;
-    }
-    
-    .booking-photo {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .booking-price {
-        grid-column: 2;
-        text-align: left;
-    }
-}
-/* ================================================= */
-/* ===== ФОН С ЦВЕТАМИ ВНУТРИ БЛОКОВ ЗАПИСЕЙ ======= */
-/* ================================================= */
-
-.bookings-block {
-    position: relative; /* чтобы цветы позиционировались внутри блока */
-       /* чтобы цветы не вылезали за рамки */
-}
-
-.bookings-block .bg-animation {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-}
-
-.bookings-block .floating-flower {
-    position: absolute;
-    bottom: -150px;
-    width: 140px;
-    height: 140px;
-    background-image: url('photos/flower.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0.35;
-    animation-name: floatUp;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-}
-
-/* Контент блока — поверх фоновых цветов */
-.bookings-block > *:not(.bg-animation) {
-    position: relative;
-    z-index: 2;
-}
-
-/* ================================================= */
-/* ===== ЗАГОЛОВКИ С ГИФКАМИ ПО БОКАМ ============== */
-/* ================================================= */
-
-.master-name1 {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; /* заголовки слева, как в макете */
-    gap: 15px;
-    margin-bottom: 25px;
-    flex-wrap: wrap;
-}
-
-.master-name1 .block-title {
-    margin: 0; /* убираем нижний отступ, т.к. отступ задаёт обёртка */
-}
-
-.master-name1 .name-gif {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-/* ================================================= */
-/* ===== ФОН С ЦВЕТАМИ ВНУТРИ БЛОКА ПРОФИЛЯ ======== */
-/* ================================================= */
-
-.profile-card {
-    position: sticky;   /* уже было, но на всякий случай */
-    overflow: visible;  /* чтобы вращающиеся цветы на углах не обрезались */
-}
-
-.profile-card .bg-animation {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;   /* плавающие цветы не вылезают за рамки */
-}
-
-.profile-card .floating-flower {
-    position: absolute;
-    bottom: -150px;
-    width: 120px;
-    height: 120px;
-    background-image: url('photos/flower.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0.35;
-    animation-name: floatUp;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-}
-
-/* Контент профиля — поверх фоновых цветов */
-.profile-card > *:not(.bg-animation):not(.card-spin-flower) {
-    position: relative;
-    z-index: 2;
-}
-
-/* ================================================= */
-/* ===== ВРАЩАЮЩИЕСЯ ЦВЕТЫ НА УГЛАХ БЛОКОВ ========= */
-/* ================================================= */
-
-.card-spin-flower {
-    position: absolute;
-    width: 90px;
-    height: 90px;
-    background-image: url('photos/flower.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    z-index: 6;
-    pointer-events: none;
-    animation: flowerSpin 9s linear infinite;
-}
-
-.card-spin-flower-tr {
-    top: -45px;
-    right: -45px;
-}
-
-.card-spin-flower-bl {
-    bottom: -45px;
-    left: -45px;
-    animation-direction: reverse;
-}
-
-@keyframes flowerSpin {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-}
-/* --- КОНТЕНТ ПОДВАЛА (текст поверх букв) --- */
-.footer-content {
-    position: relative;
-    z-index: 2;
+.account-layout {
+    display: grid;
+    grid-template-columns: clamp(220px, 25vw, 280px) 1fr;
+    gap: clamp(20px, 3vw, 30px);
     width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px;
+    align-items: start;
 }
 
-.footer-contacts {
+.profile-card {
+    background: #ffffff;
+    border: clamp(4px, 0.5vw, 6px) solid #ffcce6;
+    padding: clamp(20px, 3vw, 30px) clamp(15px, 2.5vw, 25px);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    gap: clamp(12px, 2vw, 20px);
+    position: sticky;
+    top: 20px;
+    overflow: visible;
 }
 
-/* --- СТРОКИ ТЕКСТА (без анимации появления и без hover-реакции) --- */
-.footer-line {
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+}
+
+.profile-name {
+    font-family: 'Georgia', serif;
+    font-size: clamp(15px, 1.5vw, 18px);
+    color: #bd83a7;
+    text-transform: lowercase;
+    letter-spacing: 1px;
+}
+
+.profile-phone {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 25px;
-    font-weight: 600;
+    font-size: clamp(15px, 1.7vw, 20px);
     color: #bd83a7;
     text-decoration: none;
-    line-height: 1.9;
-    pointer-events: none;        /* текст не реагирует на курсор */
-    user-select: none;           /* нельзя выделить (по желанию) */
+    text-align: center;
+    transition: color 0.3s ease;
 }
 
-
-
-/* Пустая строка-отступ между группами */
-.footer-gap {
-    margin-top: 22px;
+.profile-phone:hover {
+    color: #ff69b4;
 }
 
-/* --- ИКОНКИ СОЦСЕТЕЙ (единственное, что реагирует на hover) --- */
-.footer-social {
-    display: flex;
-    gap: 12px;
-    margin-top: 10px;
-    pointer-events: auto;        /* соцсети кликабельны */
-}
-
-.social-btn {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: #b76e9e;
+.logout-btn {
+    width: 100%;
+    padding: clamp(10px, 1.2vw, 12px) clamp(20px, 3vw, 30px);
+    background: #bfbfbf;
+    border: 2px solid #ffcce6;
+    font-family: 'Georgia', serif;
+    font-size: clamp(14px, 1.3vw, 16px);
     color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    text-transform: lowercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: visible;
 }
 
-.social-btn svg {
-    width: 20px;
-    height: 20px;
-    fill: #ffffff;
-}
-
-.social-btn:hover {
+.logout-btn:hover {
     background: #ff69b4;
-    transform: translateY(-6px) scale(1.15) rotate(-8deg);
-    box-shadow: 0 8px 18px rgba(255, 105, 180, 0.5),
-                0 0 12px rgba(255, 204, 230, 0.9);
+    border-color: #ffffff;
+    animation: shootBubbles 0.6s ease-out forwards;
 }
-
-
-.footer .flower-left { top: -5px; left: 2px; }
-.footer .flower-right { bottom: -5px; right: 0; }
-
-/* --- АДАПТИВ --- */
-@media (max-width: 768px) {
-    .footer-logo {
-        font-size: 27vw;
-        text-shadow: 40px 0 0 #ffffff;
-    }
-    .footer-line {
-        font-size: 16px;
-    }
-    .footer .flower {
-        width: 70px;
-        height: 70px;
-    }
-}
-/* ================================================= */
-/* =================== ПОДВАЛ (FOOTER) ============= */
-/* ================================================= */
-
-.footer {
-    position: relative;
-    width: 100%;
-    background: #ffdbf7;          /* тот же розовый, что и в шапке */
-    overflow: hidden;
-    padding: 70px 0 60px;
-    min-height: 380px;
-}
-
-/* --- ФОНОВАЯ АНИМАЦИЯ ЦВЕТОВ (как в шапке) --- */
-.footer .bg-animation {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.footer .floating-flower {
-    position: absolute;
-    bottom: -150px;
-    width: 160px;
-    height: 160px;
-    background-image: url('photos/flower.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0.4;
-    animation-name: floatUp;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-}
-
-/* --- ГИГАНТСКАЯ НАДПИСЬ HANDY (точно как в шапке) --- */
-.footer-logo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scaleY(2);
-    font-family: 'Cormorant Garamond', "Times New Roman", serif;
-    font-size: 27vw;
-    font-weight: 300;
-    letter-spacing: -3px;
-    line-height: 0.8;
-    white-space: nowrap;
-    color: #c4c4c4;
-    text-shadow: 75px 0px 0 #ffffff;
-    z-index: 1;
-    pointer-events: none;
-    animation: breathe 4s ease-in-out infinite alternate;
-}
-
-@keyframes breathe {
-    0%   { transform: translate(-50%, -50%) scaleY(2) scaleX(1); }
-    100% { transform: translate(-50%, -50%) scaleY(2.05) scaleX(1.02); }
-}
-/* ================================================= */
-/* ===== РОФЕЛЬНАЯ АУРА ВОКРУГ АВАТАРА ============= */
-/* ================================================= */
 
 .profile-avatar-wrap {
     position: relative;
-    width: 90px;
-    height: 90px;
+    width: clamp(70px, 8vw, 90px);
+    height: clamp(70px, 8vw, 90px);
     display: flex;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
 }
 
 .profile-avatar {
-    width: 70px;
-    height: 70px;
+    width: clamp(54px, 6vw, 70px);
+    height: clamp(54px, 6vw, 70px);
     background: #bd83a7;
     border-radius: 50%;
     display: flex;
@@ -756,12 +263,11 @@ body {
 }
 
 .profile-avatar svg {
-    width: 42px;
-    height: 42px;
+    width: clamp(30px, 3.5vw, 42px);
+    height: clamp(30px, 3.5vw, 42px);
     fill: #ffffff;
 }
 
-/* Пульсирующая аура */
 .avatar-aura {
     position: absolute;
     inset: 0;
@@ -771,13 +277,12 @@ body {
     z-index: 1;
 }
 
-/* Второе кольцо для «двойной» ауры */
 .avatar-aura::after {
     content: '';
     position: absolute;
-    inset: 12px;
+    inset: clamp(8px, 1vw, 12px);
     border-radius: 50%;
-    border: 2px dashed rgba(255, 105, 180, 0.6);
+    border: clamp(1px, 0.2vw, 2px) dashed rgba(255, 105, 180, 0.6);
     animation: auraSpin 8s linear infinite;
 }
 
@@ -797,53 +302,212 @@ body {
     100% { transform: translateY(-4px); }
 }
 
-/* ================================================= */
-/* ===== «ЖИВОЙ» СТАТУС С ГИФКОЙ =================== */
-/* ================================================= */
-
-.profile-info {
+.account-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 6px;
+    gap: clamp(20px, 3vw, 30px);
 }
 
-.profile-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 3px 12px;
-    background: rgba(255, 204, 230, 0.25);
-    border: 1px solid #ffcce6;
-    border-radius: 20px;
-    animation: statusWiggle 4s ease-in-out infinite;
+.bookings-block {
+    position: relative;
+    background: #ffffff;
+    border: clamp(4px, 0.5vw, 6px) solid #ffcce6;
+    padding: clamp(15px, 2.5vw, 25px);
 }
 
-.status-gif {
-    width: 22px;
-    height: 22px;
-    object-fit: contain;
+.bookings-block .bg-animation,
+.profile-card .bg-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
 }
 
-.status-text {
+.bookings-block .floating-flower,
+.profile-card .floating-flower {
+    position: absolute;
+    bottom: -150px;
+    width: clamp(90px, 12vw, 140px);
+    height: clamp(90px, 12vw, 140px);
+    background-image: url('photos/flower.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.35;
+    animation-name: floatUp;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.bookings-block > *:not(.bg-animation),
+.profile-card > *:not(.bg-animation):not(.card-spin-flower) {
+    position: relative;
+    z-index: 2;
+}
+
+.block-title {
+    display: inline-block;
+    padding: clamp(7px, 0.8vw, 8px) clamp(18px, 2.5vw, 25px);
+    background: #bfbfbf;
+    border: 2px solid #ffcce6;
     font-family: 'Georgia', serif;
-    font-size: 13px;
-    color: #bd83a7;
+    font-size: clamp(16px, 1.6vw, 18px);
+    color: #ffffff;
     text-transform: lowercase;
     letter-spacing: 1px;
+    margin: 0 0 clamp(18px, 2.5vw, 25px) 0;
 }
 
-@keyframes statusWiggle {
-    0%, 100% { transform: rotate(-2deg); }
-    50%      { transform: rotate(2deg); }
+.bookings-list {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(14px, 2vw, 20px);
 }
+
+.booking-item {
+    background: #ffffff;
+    border: 4px solid #ffcce6;
+    padding: clamp(12px, 2vw, 20px);
+    display: grid;
+    grid-template-columns: clamp(64px, 9vw, 100px) 1fr auto;
+    gap: clamp(12px, 2vw, 20px);
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.booking-photo {
+    width: clamp(64px, 9vw, 100px);
+    height: clamp(64px, 9vw, 100px);
+    background: #d3d3d3;
+    border-radius: clamp(12px, 1.5vw, 15px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(14px, 1.5vw, 18px);
+    color: #000000;
+    text-transform: lowercase;
+    overflow: hidden;
+}
+
+.booking-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: clamp(12px, 1.5vw, 15px);
+}
+
+.booking-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.booking-name,
+.booking-master,
+.booking-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(16px, 1.6vw, 18px);
+    color: #ff69b4;
+    text-transform: lowercase;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.booking-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 1.8vw, 20px);
+    color: #ff69b4;
+    text-transform: lowercase;
+    white-space: nowrap;
+}
+
 .empty-msg {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
+    font-size: clamp(16px, 1.6vw, 18px);
     color: #d1a3c1;
     text-align: center;
     padding: 20px 0;
     font-style: italic;
+}
+
+.done-btn {
+    margin-top: 10px;
+    padding: clamp(7px, 0.8vw, 10px) clamp(20px, 3vw, 30px);
+    background-color: #bfbfbf;
+    border: 2px solid #ffcce6;
+    color: #ffffff;
+    font-family: 'Georgia', serif;
+    font-size: clamp(14px, 1.3vw, 16px);
+    text-transform: lowercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.3s ease;
+    overflow: visible;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.done-btn:hover {
+    background-color: #ff69b4;
+    border-color: #ffffff;
+    transform: translateY(-2px);
+    animation: shootBubbles 0.6s ease-out forwards;
+}
+
+.master-name1 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: clamp(10px, 1.5vw, 15px);
+    margin-bottom: clamp(18px, 2.5vw, 25px);
+    flex-wrap: wrap;
+}
+
+.master-name1 .block-title {
+    margin: 0;
+}
+
+.master-name1 .name-gif {
+    width: clamp(45px, 5vw, 60px);
+    height: clamp(45px, 5vw, 60px);
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.card-spin-flower {
+    position: absolute;
+    width: clamp(60px, 8vw, 90px);
+    height: clamp(60px, 8vw, 90px);
+    background-image: url('photos/flower.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 6;
+    pointer-events: none;
+    animation: flowerSpin 9s linear infinite;
+}
+
+.card-spin-flower-tr {
+    top: clamp(-45px, -6vw, -30px);
+    right: clamp(-45px, -6vw, -30px);
+}
+
+.card-spin-flower-bl {
+    bottom: clamp(-45px, -6vw, -30px);
+    left: clamp(-45px, -6vw, -30px);
+    animation-direction: reverse;
+}
+
+@keyframes flowerSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
 }
 
 .modal-overlay {
@@ -854,357 +518,207 @@ body {
     opacity: 0; visibility: hidden;
     transition: opacity .35s ease, visibility .35s ease;
 }
+
 .modal-overlay.active { opacity: 1; visibility: visible; }
 
 .modal-content {
     position: relative;
-    background: #fff; border: 8px solid #ffcce6;
-    padding: 40px; width: 90%; max-width: 500px;
-    max-height: 90vh; overflow-y: auto;
+    background: #fff; border: clamp(6px, 0.8vw, 8px) solid #ffcce6;
+    padding: clamp(25px, 4vw, 40px);
+    width: min(90%, 500px); max-height: 90vh; overflow-y: auto;
     transform: translateY(20px);
     transition: transform .35s cubic-bezier(.25,.8,.25,1);
 }
+
 .modal-overlay.active .modal-content { transform: translateY(0); }
 
 .modal-close {
-    position: absolute; top: 15px; right: 20px;
+    position: absolute; top: clamp(8px, 1.5vw, 15px); right: clamp(12px, 2vw, 20px);
     background: none; border: none;
-    font-size: 30px; color: #ffb3d9; cursor: pointer;
+    font-size: clamp(26px, 3vw, 30px); color: #ffb3d9; cursor: pointer;
 }
+
 .modal-close:hover { color: #ff69b4; }
 
 .details-row {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 18px; color: #ff69b4;
+    font-size: clamp(16px, 1.6vw, 18px); color: #ff69b4;
     padding: 6px 0; text-transform: lowercase;
 }
+
 .details-row span {
     font-family: Georgia, serif;
-    font-size: 14px; color: #bd83a7;
+    font-size: clamp(13px, 1.2vw, 14px); color: #bd83a7;
     margin-right: 8px;
 }
+
 .details-img img { width: 100%; border-radius: 12px; margin-top: 15px; }
-a.profile-avatar-wrap {
-    text-decoration: none;
-    display: flex; /* на случай, если браузер сбросит */
+
+.footer {
+    position: relative;
+    width: 100%;
+    background: #ffdbf7;
+    overflow: hidden;
+    padding: clamp(50px, 7vw, 70px) 0 clamp(45px, 6vw, 60px);
+    min-height: clamp(300px, 40vw, 380px);
 }
-/* Кнопка "Услуга оказана" в карточке записи (стиль как у меню) */
-.done-btn {
-    margin-top: 10px;
-    padding: 7px 30px; /* Отступы как у .menu-btn */
-    background-color: #bfbfbf; 
-    border: 2px solid #ffcce6; 
-    color: #ffffff; 
-    
-    font-family: 'Georgia', serif; 
-    font-size: 16px; /* Чуть меньше, чтобы влезло в карточку */
-    text-transform: lowercase; 
-    letter-spacing: 1px;
-    cursor: pointer;
-    
-    transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.3s ease;
-    overflow: visible;
-    display: inline-flex;
+
+.footer .bg-animation {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.footer .floating-flower {
+    position: absolute;
+    bottom: -150px;
+    width: clamp(90px, 12vw, 160px);
+    height: clamp(90px, 12vw, 160px);
+    background-image: url('photos/flower.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.4;
+    animation-name: floatUp;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.footer-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scaleY(2);
+    font-family: 'Cormorant Garamond', "Times New Roman", serif;
+    font-size: clamp(72px, 27vw, 420px);
+    font-weight: 300;
+    letter-spacing: clamp(-3px, -0.3vw, -2px);
+    line-height: 0.8;
+    white-space: nowrap;
+    color: #c4c4c4;
+    text-shadow: clamp(25px, 7vw, 75px) 0 0 #ffffff;
+    z-index: 1;
+    pointer-events: none;
+    animation: breathe 4s ease-in-out infinite alternate;
+}
+
+.footer-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 clamp(25px, 4vw, 40px);
+}
+
+.footer-contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(15px, 2vw, 25px);
+    font-weight: 600;
+    color: #bd83a7;
+    text-decoration: none;
+    line-height: 1.9;
+    pointer-events: none;
+    user-select: none;
+}
+
+.footer-gap {
+    margin-top: clamp(16px, 2vw, 22px);
+}
+
+.footer-social {
+    display: flex;
+    gap: clamp(8px, 1vw, 12px);
+    margin-top: clamp(8px, 1vw, 10px);
+    pointer-events: auto;
+}
+
+.social-btn {
+    width: clamp(34px, 3.5vw, 38px);
+    height: clamp(34px, 3.5vw, 38px);
+    border-radius: 50%;
+    background: #b76e9e;
+    color: #ffffff;
+    display: flex;
     align-items: center;
     justify-content: center;
-    white-space: nowrap;
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.done-btn:hover {
-    background-color: #ff69b4; 
-    border-color: #ffffff;
-    transform: translateY(-2px);
-    animation: shootBubbles 0.6s ease-out forwards;
+.social-btn svg {
+    width: clamp(18px, 1.8vw, 20px);
+    height: clamp(18px, 1.8vw, 20px);
+    fill: #ffffff;
 }
 
-/* Копируем анимацию шариков, чтобы она работала в ЛК */
-@keyframes shootBubbles {
-    0% {
-        box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.7);
-    }
-    100% {
-        box-shadow: 
-            -20px -20px 0 0 rgba(255, 105, 180, 0.6),
-            20px -30px 0 0 rgba(255, 204, 230, 0.8),
-            -30px 0px 0 0 rgba(255, 105, 180, 0.5),
-            30px -10px 0 0 rgba(255, 204, 230, 0.7),
-            0px -40px 0 0 rgba(255, 105, 180, 0.4);
-    }
+.social-btn:hover {
+    background: #ff69b4;
+    transform: translateY(-6px) scale(1.15) rotate(-8deg);
+    box-shadow: 0 8px 18px rgba(255, 105, 180, 0.5),
+                0 0 12px rgba(255, 204, 230, 0.9);
 }
 
-/* ================================================= */
-/* ================== АДАПТИВНОСТЬ ================== */
-/* ================================================= */
+.footer .flower-left { top: -5px; left: 2px; }
+.footer .flower-right { bottom: -5px; right: 0; }
 
-/* --- ПЛАНШЕТЫ И НЕБОЛЬШИЕ ЭКРАНЫ (до 1100px) --- */
-@media (max-width: 1100px) {
-    .nav-menu {
-        gap: 50px;
-        padding: 35px 20px 10px;
-    }
-
-    .header {
-        height: 420px;
-    }
-
-    .login {
-        right: 4%;
-    }
-}
-
-/* --- ПЛАНШЕТЫ (до 900px) --- */
 @media (max-width: 900px) {
-    .header {
-        height: 360px;
+    .account-layout {
+        grid-template-columns: 1fr;
     }
 
-    .nav-menu {
-        gap: 30px;
-        padding: 30px 15px 10px;
+    .profile-card {
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
     }
 
-    .menu-btn {
-        padding: 7px 28px;
-        font-size: 16px;
-    }
-
-    .account-section {
-        padding: 40px 15px 60px;
-    }
-
-    .booking-item {
-        grid-template-columns: 90px 1fr auto;
+    .profile-info,
+    .profile-phone,
+    .logout-btn {
+        width: auto;
     }
 }
 
-/* --- ТЕЛЕФОНЫ (до 768px) --- */
-@media (max-width: 768px) {
-    .header {
-        height: 300px;
-    }
-
-    .logo {
-        font-size: 24vw;
-        letter-spacing: -2px;
-        text-shadow: 35px 0px 0 #ffffff;
-    }
-
-    .footer {
-        padding: 50px 0 45px;
-        min-height: 300px;
-    }
-
-    .footer-content {
-        padding: 0 25px;
-    }
-
-    /* Угловые цветы чуть меньше */
-    .flower {
-        width: 70px;
-        height: 70px;
-    }
-
-    /* Плавающие цветы меньше и реже */
-    .floating-flower,
-    .bookings-block .floating-flower,
-    .profile-card .floating-flower,
-    .footer .floating-flower {
-        width: 90px;
-        height: 90px;
-    }
-
-    /* Вращающиеся цветы на углах — компактнее */
-    .card-spin-flower {
-        width: 60px;
-        height: 60px;
-    }
-
-    .card-spin-flower-tr {
-        top: -30px;
-        right: -30px;
-    }
-
-    .card-spin-flower-bl {
-        bottom: -30px;
-        left: -30px;
-    }
-}
-
-/* --- НЕБОЛЬШИЕ ТЕЛЕФОНЫ (до 600px) --- */
 @media (max-width: 600px) {
-    .header {
-        height: 250px;
-    }
-
-    .logo {
-        font-size: 22vw;
-        text-shadow: 25px 0px 0 #ffffff;
-    }
-
-    /* Вход — компактнее */
-    .login {
-        top: 10px;
-        right: 15px;
-        font-size: 13px;
-        gap: 6px;
-    }
-
-    .user-icon {
-        width: 34px;
-        height: 34px;
-    }
-
-    /* Меню — в столбик, на всю ширину */
     .nav-menu {
         flex-direction: column;
         gap: 12px;
-        padding: 25px 15px 15px;
     }
 
     .menu-btn {
         width: 100%;
         max-width: 320px;
-        padding: 10px 20px;
-        font-size: 16px;
-    }
-
-    /* Личный кабинет */
-    .account-section {
-        padding: 30px 12px 50px;
-    }
-
-    .profile-card {
-        padding: 20px 15px;
-        border-width: 4px;
-    }
-
-    /* Профиль в строку — компактнее */
-    .profile-avatar-wrap {
-        width: 70px;
-        height: 70px;
-    }
-
-    .profile-avatar {
-        width: 54px;
-        height: 54px;
-    }
-
-    .profile-avatar svg {
-        width: 30px;
-        height: 30px;
-    }
-
-    .bookings-block {
-        padding: 18px 15px;
-        border-width: 4px;
-    }
-
-    .block-title {
-        font-size: 16px;
-        padding: 7px 18px;
-    }
-
-    .master-name1 .name-gif {
-        width: 45px;
-        height: 45px;
-    }
-
-    .booking-item {
-        padding: 15px 12px;
-        gap: 12px;
-    }
-
-    .booking-name,
-    .booking-master,
-    .booking-date {
-        font-size: 16px;
-    }
-
-    .booking-price {
-        font-size: 18px;
-    }
-
-    /* Кнопка «Услуга оказана» — компактнее */
-    .done-btn {
-        padding: 8px 20px;
-        font-size: 14px;
         white-space: normal;
         text-align: center;
     }
 
-    .logout-btn {
-        padding: 10px 20px;
-        font-size: 14px;
+    .booking-item {
+        grid-template-columns: 1fr;
+        justify-items: start;
     }
 
-    /* Модалка */
-    .modal-content {
-        padding: 25px 18px;
-        border-width: 6px;
-        width: 100%;
+    .booking-price {
+        white-space: normal;
     }
 
-    .modal-close {
-        top: 8px;
-        right: 12px;
-        font-size: 26px;
+    .done-btn {
+        white-space: normal;
+        text-align: center;
     }
 
-    .details-row {
-        font-size: 16px;
-    }
-
-    /* Подвал */
-    .footer-line {
-        font-size: 15px;
-    }
-
-    .social-btn {
-        width: 34px;
-        height: 34px;
-    }
-
-    .social-btn svg {
-        width: 18px;
-        height: 18px;
-    }
-
-    /* Отключаем hover-эффекты, которых нет на тач-экранах,
-       чтобы не «залипали» после тапа */
     .menu-btn:hover,
     .done-btn:hover,
     .logout-btn:hover {
         animation: none;
         transform: none;
-    }
-}
-
-/* --- ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 380px) --- */
-@media (max-width: 380px) {
-    .header {
-        height: 220px;
-    }
-
-    .booking-item {
-        grid-template-columns: 64px 1fr;
-    }
-
-    .booking-photo {
-        width: 64px;
-        height: 64px;
-        font-size: 14px;
-    }
-
-    .booking-price {
-        grid-column: 2;
-    }
-
-    .profile-name,
-    .profile-phone {
-        font-size: 15px;
-    }
-
-    .menu-btn {
-        font-size: 14px;
     }
 }

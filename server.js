@@ -6,10 +6,6 @@ const path = require('path');
 
 const app = express();
 const db = new Database(path.join(__dirname, 'handy.db'));
-
-// =====================================================
-// БД: пользователи
-// =====================================================
 db.exec(`
   CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -28,9 +24,6 @@ db.exec(`
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   )
 `);
-// =====================================================
-// БД: записи
-// =====================================================
 db.exec(`
   CREATE TABLE IF NOT EXISTS bookings (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -39,7 +32,7 @@ db.exec(`
     master TEXT NOT NULL,
     address TEXT NOT NULL,
     booking_date TEXT NOT NULL,
-    booking_time TEXT, -- <--- ДОБАВЛЕНО ПОЛЕ ВРЕМЕНИ
+    booking_time TEXT,
     client_name TEXT NOT NULL,
     client_phone TEXT NOT NULL,
     price INTEGER NOT NULL,
@@ -49,17 +42,10 @@ db.exec(`
     FOREIGN KEY (user_id) REFERENCES users(id)
   )
 `);
-
-// Миграция для старых баз данных (если таблица уже была создана без booking_time)
 try {
   db.exec(`ALTER TABLE bookings ADD COLUMN booking_time TEXT`);
 } catch (e) {
-  // Колонка уже существует — игнорируем ошибку
 }
-
-// =====================================================
-// Middleware
-// =====================================================
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session({
@@ -71,24 +57,14 @@ app.use(session({
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// =====================================================
-// Проверка авторизации
-// =====================================================
 function requireAuth(req, res, next) {
   if (!req.session.userId) return res.redirect('/login.html');
   next();
 }
 
-// =====================================================
-// Главная
-// =====================================================
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
-
-// =====================================================
-// РЕГИСТРАЦИЯ
-// =====================================================
 app.post('/api/register', (req, res) => {
   const { name, phone, password } = req.body;
 
@@ -116,9 +92,6 @@ app.post('/api/register', (req, res) => {
   res.json({ ok: true });
 });
 
-// =====================================================
-// ВХОД
-// =====================================================
 app.post('/api/login', (req, res) => {
   const { phone, password } = req.body;
 
@@ -134,16 +107,9 @@ app.post('/api/login', (req, res) => {
   res.json({ ok: true });
 });
 
-// =====================================================
-// ВЫХОД
-// =====================================================
 app.get('/api/logout', (req, res) => {
   req.session.destroy(() => res.redirect('/'));
 });
-
-// =====================================================
-// ДАННЫЕ ТЕКУЩЕГО ПОЛЬЗОВАТЕЛЯ
-// =====================================================
 app.get('/api/me', (req, res) => {
   if (!req.session.userId) return res.status(401).json({ error: 'Не авторизован' });
   res.json({
@@ -152,24 +118,24 @@ app.get('/api/me', (req, res) => {
     phone: req.session.userPhone
   });
 });
-
-// =====================================================
-// ЗАЩИЩЁННЫЙ ЛИЧНЫЙ КАБИНЕТ
-// =====================================================
 app.get('/cabinet', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'lichykabinet.html'));
 });
 
-// =====================================================
-// СОЗДАТЬ ЗАПИСЬ
-// =====================================================
+app.get('/api/busy', (req, res) => {
+  const allBusy = db.prepare(
+    "SELECT booking_date, booking_time, master FROM bookings WHERE status = 'active'"
+  ).all();
+  res.json(allBusy);
+});
+
 app.post('/api/bookings', (req, res) => {
   if (!req.session.userId) {
     return res.status(401).json({ error: 'Не авторизован' });
   }
 
   const {
-    service, master, address, booking_date, booking_time, // <--- ДОБАВЛЕНО ВРЕМЯ
+    service, master, address, booking_date, booking_time,
     client_name, client_phone, price, image
   } = req.body;
 
@@ -177,9 +143,8 @@ app.post('/api/bookings', (req, res) => {
     return res.status(400).json({ error: 'Заполните все поля' });
   }
 
-  // Проверка, занято ли это время у этого мастера
   const conflict = db.prepare(`
-    SELECT id FROM bookings 
+    SELECT id FROM bookings
     WHERE booking_date = ? AND booking_time = ? AND master = ? AND status = 'active'
   `).get(booking_date, booking_time, master);
 
@@ -193,7 +158,7 @@ app.post('/api/bookings', (req, res) => {
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `).run(
     req.session.userId,
-    service, master, address, booking_date, booking_time, // <--- СОХРАНЯЕМ ВРЕМЯ
+    service, master, address, booking_date, booking_time,
     client_name, client_phone,
     Number(price) || 0,
     image || null
@@ -202,15 +167,11 @@ app.post('/api/bookings', (req, res) => {
   res.json({ ok: true, id: info.lastInsertRowid });
 });
 
-// =====================================================
-// СПИСОК ЗАПИСЕЙ ТЕКУЩЕГО ПОЛЬЗОВАТЕЛЯ
-// =====================================================
 app.get('/api/bookings', (req, res) => {
   if (!req.session.userId) {
     return res.status(401).json({ error: 'Не авторизован' });
   }
 
-  // Отдаем записи. Теперь booking_time автоматически возвращается, так как мы добавили его в БД.
   const active = db.prepare(
     "SELECT * FROM bookings WHERE user_id = ? AND status = 'active' ORDER BY booking_date ASC, booking_time ASC"
   ).all(req.session.userId);
@@ -219,21 +180,9 @@ app.get('/api/bookings', (req, res) => {
     "SELECT * FROM bookings WHERE user_id = ? AND status = 'done' ORDER BY booking_date DESC, booking_time DESC"
   ).all(req.session.userId);
 
-  // ВАЖНО: для календаря (чтобы блокировать время у ВСЕХ пользователей) нам нужны все занятые слоты, а не только текущего юзера.
-  // Но так как клиентский код ожидает формат { active, done }, мы добавим туда все занятые слоты.
-  // Если вы хотите, чтобы пользователь видел только свои записи в ЛК, оставьте как есть, но для календаря 
-  // нужен отдельный эндпоинт или мы отдаем всех.
-  
-  const allBusy = db.prepare(
-    "SELECT booking_date, booking_time, master FROM bookings WHERE status = 'active'"
-  ).all();
-
-  res.json({ active, done, allBusy });
+  res.json({ active, done });
 });
 
-// =====================================================
-// ОДНА ЗАПИСЬ ПО ID
-// =====================================================
 app.get('/api/bookings/:id', (req, res) => {
   if (!req.session.userId) {
     return res.status(401).json({ error: 'Не авторизован' });
@@ -246,9 +195,7 @@ app.get('/api/bookings/:id', (req, res) => {
   if (!booking) return res.status(404).json({ error: 'Не найдено' });
   res.json(booking);
 });
-// =====================================================
-// ОТМЕТИТЬ ЗАПИСЬ КАК ВЫПОЛНЕННУЮ (ПОЛЬЗОВАТЕЛЕМ)
-// =====================================================
+
 app.post('/api/bookings/:id/done', (req, res) => {
   if (!req.session.userId) {
     return res.status(401).json({ error: 'Не авторизован' });
@@ -256,21 +203,17 @@ app.post('/api/bookings/:id/done', (req, res) => {
 
   const bookingId = req.params.id;
 
-  // Проверяем, что запись принадлежит этому пользователю
   const booking = db.prepare('SELECT id FROM bookings WHERE id = ? AND user_id = ?').get(bookingId, req.session.userId);
-  
+
   if (!booking) {
     return res.status(404).json({ error: 'Запись не найдена' });
   }
 
-  // Меняем статус на done
   db.prepare("UPDATE bookings SET status = 'done' WHERE id = ?").run(bookingId);
-  
+
   res.json({ ok: true });
 });
-// =====================================================
-// ОТЗЫВЫ
-// =====================================================
+
 app.get('/api/reviews', (req, res) => {
   const reviews = db.prepare('SELECT * FROM reviews ORDER BY created_at DESC').all();
   res.json(reviews);
@@ -278,7 +221,7 @@ app.get('/api/reviews', (req, res) => {
 
 app.post('/api/reviews', (req, res) => {
   const { author, rating, text } = req.body;
-  
+
   if (!author || !rating || !text) {
     return res.status(400).json({ error: 'Заполните все поля' });
   }
@@ -289,9 +232,7 @@ app.post('/api/reviews', (req, res) => {
 
   res.json({ ok: true, id: info.lastInsertRowid });
 });
-// =====================================================
-// Запуск
-// =====================================================
+
 app.listen(3001, () => {
   console.log('Сервер запущен: http://localhost:3001');
 });

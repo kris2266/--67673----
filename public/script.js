@@ -1,5 +1,4 @@
 (function () {
-    // ===== НАСТРОЙКИ =====
     const monthNames = [
         'january', 'february', 'march', 'april', 'may', 'june',
         'july', 'august', 'september', 'october', 'november', 'december'
@@ -8,18 +7,14 @@
         'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
         'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'
     ];
-
-    // Все возможные часы (должны совпадать с <select id="booking-time"> в HTML)
     const ALL_TIMES = ['10:00', '12:00', '14:00', '16:00', '18:00', '20:00'];
 
     const now = new Date();
     let currentYear = now.getFullYear();
     let currentMonth = now.getMonth();
 
-    // Занятые слоты: { "YYYY-MM-DD": ["16:00", "18:00"], ... }
     let busySlots = {};
 
-    // ===== DOM =====
     const grid = document.getElementById('calendarGrid');
     const monthLabel = document.getElementById('monthLabel');
     const modal = document.getElementById('bookingModal');
@@ -32,19 +27,16 @@
         return all[serviceName] || {};
     }
 
-    // ===== УТИЛИТЫ ДАТ =====
     function pad(n) { return String(n).padStart(2, '0'); }
 
     function parseBookingDate(str) {
         if (!str) return null;
         str = String(str).trim();
 
-        // ISO: 2026-11-21
         let m = str.match(/^(\d{4})-(\d{2})-(\d{2})$/);
         if (m) return { y: +m[1], m: +m[2], d: +m[3] };
 
-        // "21 november" / "21 ноября"
-        m = str.match(/^(\d{1,2})\s+([a-zа-я]+)$/i);
+        m = str.match(/^(\d{1,2})\s+([a-zа-яё]+)$/i);
         if (m) {
             const day = +m[1];
             const name = m[2].toLowerCase();
@@ -67,7 +59,6 @@
         return target < todayStart;
     }
 
-    // Достаёт ISO-дату из поля даты независимо от его типа
     function getDateInputISO() {
         const dateInput = document.getElementById('booking-date-input');
         if (!dateInput) return null;
@@ -76,7 +67,6 @@
         return parsed ? toISO(parsed.y, parsed.m, parsed.d) : null;
     }
 
-    // Заполняет <select id="booking-time"> свободными часами на дату
     function fillFreeTimes(isoDate) {
         const timeSelect = document.getElementById('booking-time');
         if (!timeSelect) return;
@@ -99,24 +89,21 @@
 
         if (timeSelect.options.length <= 1) {
             const opt = document.createElement('option');
-            opt.value = "";
+            opt.value = '';
             opt.disabled = true;
             opt.textContent = 'нет свободного времени';
             timeSelect.appendChild(opt);
         }
     }
 
-       // ===== ЗАГРУЗКА ЗАНЯТЫХ СЛОТОВ =====
     async function loadBusySlots() {
         try {
-            const res = await fetch('/api/bookings', { credentials: 'same-origin' });
-            if (!res.ok) return;
-            const data = await res.json();
-            const all = []
-                .concat(Array.isArray(data) ? data : [])
-                .concat(data.active || [])
-                .concat(data.done || [])
-                .concat(data.allBusy || []); // <--- ДОБАВИТЬ ЭТО
+            const res = await fetch('/api/busy', { credentials: 'same-origin' });
+            if (!res.ok) {
+                console.warn('busy slots error:', res.status);
+                return;
+            }
+            const all = await res.json();
 
             busySlots = {};
             all.forEach(b => {
@@ -130,11 +117,10 @@
                 }
             });
         } catch (e) {
-            // тихо игнорируем
+            console.error('loadBusySlots failed:', e);
         }
     }
 
-    // ===== РЕНДЕР КАЛЕНДАРЯ =====
     function renderCalendar() {
         if (!grid) return;
 
@@ -215,7 +201,6 @@
         }
     }
 
-    // ===== КНОПКИ «записаться» НА КАРТОЧКАХ УСЛУГ =====
     function bindServiceButtons() {
         document.querySelectorAll('.service-book-btn').forEach(function (btn) {
             btn.addEventListener('click', function () {
@@ -250,7 +235,6 @@
                     if (modalDateSpan) modalDateSpan.textContent = dateInput.value;
                 }
 
-                // Обновляем список времён под текущую дату (работает и для type="text")
                 const currentISO = getDateInputISO();
                 if (currentISO) fillFreeTimes(currentISO);
 
@@ -270,7 +254,6 @@
         }
     }
 
-    // ===== ОТПРАВКА ФОРМЫ =====
     async function handleBookingSubmit(e) {
         e.preventDefault();
 
@@ -337,14 +320,12 @@
 
     function bindBookingForm() {
         if (!bookingForm) return;
-        if (bookingForm.dataset.submitBound === "1") return;
-        bookingForm.dataset.submitBound = "1";
+        if (bookingForm.dataset.submitBound === '1') return;
+        bookingForm.dataset.submitBound = '1';
         bookingForm.addEventListener('submit', handleBookingSubmit);
     }
 
-    // ===== ИНИЦИАЛИЗАЦИЯ =====
     async function init() {
-        // Ограничение min для type="date" — локальная дата
         const dateInput = document.getElementById('booking-date-input');
         if (dateInput && dateInput.type === 'date') {
             const d = new Date();

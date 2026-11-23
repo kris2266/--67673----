@@ -15,30 +15,24 @@
         'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
         'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'
     ];
-
     const ALL_TIMES = ['10:00', '12:00', '14:00', '16:00', '18:00', '20:00'];
 
-    // Занятые слоты: { "YYYY-MM-DD": ["16:00", ...] }
     let busySlots = {};
 
-    // ===== СПРАВОЧНИК УСЛУГ =====
     function getServiceMeta(serviceName) {
         const all = window.SERVICES || {};
         return all[serviceName] || {};
     }
 
-    // ===== УТИЛИТЫ ДАТ =====
     function pad(n) { return String(n).padStart(2, '0'); }
 
     function parseBookingDate(str) {
         if (!str) return null;
         str = String(str).trim();
 
-        // ISO: 2026-11-21
         let m = str.match(/^(\d{4})-(\d{2})-(\d{2})$/);
         if (m) return { y: +m[1], m: +m[2], d: +m[3] };
 
-        // "21 november" / "21 ноября"
         m = str.match(/^(\d{1,2})\s+([a-zа-я]+)$/i);
         if (m) {
             const day = +m[1];
@@ -85,24 +79,24 @@
 
         if (timeSelect.options.length <= 1) {
             const opt = document.createElement('option');
-            opt.value = "";
+            opt.value = '';
             opt.disabled = true;
             opt.textContent = 'нет свободного времени';
             timeSelect.appendChild(opt);
         }
     }
 
-        // ===== ЗАГРУЗКА ЗАНЯТЫХ СЛОТОВ =====
     async function loadBusySlots() {
         try {
             const res = await fetch('/api/bookings', { credentials: 'same-origin' });
             if (!res.ok) return;
             const data = await res.json();
+
             const all = []
                 .concat(Array.isArray(data) ? data : [])
                 .concat(data.active || [])
                 .concat(data.done || [])
-                .concat(data.allBusy || []); // <--- ДОБАВИТЬ ЭТО
+                .concat(data.allBusy || []);
 
             busySlots = {};
             all.forEach(b => {
@@ -115,12 +109,9 @@
                     busySlots[key].push(time);
                 }
             });
-        } catch (e) {
-            // тихо игнорируем
-        }
+        } catch (e) {}
     }
 
-    // ===== ОТКРЫТИЕ МОДАЛКИ ПО КНОПКАМ «записаться» =====
     bookButtons.forEach(function (btn) {
         btn.addEventListener('click', function () {
             const card = btn.closest('.master-card');
@@ -152,17 +143,16 @@
         });
     });
 
-    // ===== ЗАКРЫТИЕ МОДАЛКИ =====
     if (closeBtn) {
         closeBtn.addEventListener('click', function () {
             modal.classList.remove('active');
         });
     }
+
     modal.addEventListener('click', function (e) {
         if (e.target === modal) modal.classList.remove('active');
     });
 
-    // ===== ОТПРАВКА ФОРМЫ =====
     async function handleBookingSubmit(e) {
         e.preventDefault();
 
@@ -199,7 +189,6 @@
             return;
         }
 
-        // Приводим дату к ISO на случай, если бэкенд вернул не ISO
         const parsed = parseBookingDate(payload.booking_date);
         const iso = parsed ? toISO(parsed.y, parsed.m, parsed.d) : payload.booking_date;
 
@@ -231,12 +220,11 @@
         await loadBusySlots();
     }
 
-    if (bookingForm && bookingForm.dataset.submitBound !== "1") {
-        bookingForm.dataset.submitBound = "1";
+    if (bookingForm && bookingForm.dataset.submitBound !== '1') {
+        bookingForm.dataset.submitBound = '1';
         bookingForm.addEventListener('submit', handleBookingSubmit);
     }
 
-    // ===== ИНИЦИАЛИЗАЦИЯ =====
     const dateInput = document.getElementById('booking-date-input');
     if (dateInput && dateInput.type === 'date') {
         dateInput.min = todayISO();

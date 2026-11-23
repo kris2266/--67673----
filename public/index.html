@@ -3,30 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>главная</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="photos/flower.svg">
 </head>
 <body>
     <header class="header">
-        <!-- Контейнер для анимации -->
         <div class="bg-animation">
-            <div class="floating-flower" style="left: 5%; animation-duration: 12s; animation-delay: 0s;"></div>
-            <div class="floating-flower" style="left: 25%; animation-duration: 16s; animation-delay: 3s;"></div>
-            <div class="floating-flower" style="left: 45%; animation-duration: 14s; animation-delay: 1s;"></div>
-            <div class="floating-flower" style="left: 65%; animation-duration: 18s; animation-delay: 5s;"></div>
-            <div class="floating-flower" style="left: 85%; animation-duration: 15s; animation-delay: 2s;"></div>
+            <div class="floating-flower" style="left:5%;animation-duration:12s;animation-delay:0s"></div>
+            <div class="floating-flower" style="left:25%;animation-duration:16s;animation-delay:3s"></div>
+            <div class="floating-flower" style="left:45%;animation-duration:14s;animation-delay:1s"></div>
+            <div class="floating-flower" style="left:65%;animation-duration:18s;animation-delay:5s"></div>
+            <div class="floating-flower" style="left:85%;animation-duration:15s;animation-delay:2s"></div>
         </div>
-
         <div class="logo">HANDY</div>
-
-        <a href="/login.html" class="login" style="visibility: hidden;">
+        <a href="/login.html" class="login" style="visibility:hidden">
             <span class="user-icon"></span>
             <span class="login-text">ВОЙТИ</span>
         </a>
-
         <div class="flower flower-left"></div>
         <div class="flower flower-right"></div>
     </header>
@@ -40,13 +37,10 @@
 
     <section class="video-section">
         <div class="video-frame">
-            <!-- Видео с классом для стилизации -->
             <video class="video-placeholder" autoplay loop muted playsinline>
                 <source src="491043fb57cb6d7472e413433f4d040e.mp4" type="video/mp4">
                 Ваш браузер не поддерживает видео.
             </video>
-
-            <!-- цветочки на углах -->
             <div class="video-flower video-flower-tr"></div>
             <div class="video-flower video-flower-bl"></div>
         </div>
@@ -54,9 +48,7 @@
 
     <section class="portfolio-section">
         <h2 class="portfolio-title">наши работы</h2>
-
         <div class="portfolio-grid">
-            <!-- Карточка 1 -->
             <article class="work-card">
                 <div class="work-photo">
                     <video class="video-placeholder" autoplay loop muted playsinline>
@@ -66,37 +58,23 @@
                 </div>
                 <div class="work-master">Дарья Хафизова</div>
                 <div class="work-desc">нежный нюдовый маникюр, форма миндаль, без дизайна, выполнен с выравниванием и наращиванием <br>2000руб.</div>
-
                 <div class="card-flower card-flower-tr"></div>
                 <div class="card-flower card-flower-bl"></div>
             </article>
-
-            <!-- Карточка 2 -->
             <article class="work-card">
-                <div class="work-photo">
-                    <img src="photos/primer3.jpg">
-                </div>
+                <div class="work-photo"><img src="photos/primer3.jpg"></div>
                 <div class="work-master">Мария Макривская</div>
                 <div class="work-desc">нежный френч с блестящим гель-лаком, выполнен с выращиванием без наращивания<br>2300руб.</div>
-
                 <div class="card-flower card-flower-tr"></div>
                 <div class="card-flower card-flower-bl"></div>
             </article>
-
-            <!-- Карточка 4 (цветы слева) -->
             <article class="work-card">
-                <div class="work-photo">
-                    <img src="photos/primer4.jpg">
-                </div>
+                <div class="work-photo"><img src="photos/primer4.jpg"></div>
                 <div class="work-master">Софья Высоцкая</div>
                 <div class="work-desc">когти, выполнены из светоотражающей базы, в качестве дизайна использованы фигурки в виде пирсинга <br>4500руб.</div>
-
-                <!-- Оба цветка слева -->
                 <div class="card-flower card-flower-tl"></div>
                 <div class="card-flower card-flower-bl"></div>
             </article>
-
-            <!-- Карточка 3 (цветы справа) -->
             <article class="work-card">
                 <div class="work-photo">
                     <video class="video-placeholder" autoplay loop muted playsinline>
@@ -106,8 +84,6 @@
                 </div>
                 <div class="work-master">Лариса Апельсинова</div>
                 <div class="work-desc">креативный дизайн, выполнен с использованием матового покрытия и с объемными элементами<br>2800руб.</div>
-
-                <!-- Оба цветка справа -->
                 <div class="card-flower card-flower-tr"></div>
                 <div class="card-flower card-flower-br"></div>
             </article>
@@ -115,28 +91,19 @@
     </section>
 
     <section class="calendar-section">
-        <!-- Изогнутая надпись HANDY -->
         <div class="curved-title">
             <svg viewBox="0 0 600 120" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <path id="curvePath" d="M 60,90 Q 300,10 540,90" fill="none" />
-                </defs>
-                <text>
-                    <textPath href="#curvePath" startOffset="50%" text-anchor="middle">HANDY</textPath>
-                </text>
+                <defs><path id="curvePath" d="M 60,90 Q 300,10 540,90" fill="none" /></defs>
+                <text><textPath href="#curvePath" startOffset="50%" text-anchor="middle">HANDY</textPath></text>
             </svg>
         </div>
-
         <h2 class="calendar-title">календарь</h2>
-
         <div class="master-name1">
             <img src="photos/gif4.gif" alt="" class="name-gif">
             <div class="calendar-month" id="monthLabel">ноябрь</div>
             <img src="photos/gif4.gif" alt="" class="name-gif">
         </div>
-
         <div class="calendar-grid" id="calendarGrid">
-            <!-- Дни недели -->
             <div class="calendar-day-header">пн</div>
             <div class="calendar-day-header">вт</div>
             <div class="calendar-day-header">ср</div>
@@ -144,11 +111,9 @@
             <div class="calendar-day-header">пт</div>
             <div class="calendar-day-header">сб</div>
             <div class="calendar-day-header">вс</div>
-            <!-- Ячейки будут сгенерированы скриптом -->
         </div>
     </section>
 
-    <!-- Модальное окно для записи -->
     <div class="modal-overlay" id="bookingModal">
         <div class="modal-content">
             <button class="modal-close">&times;</button>
@@ -157,7 +122,6 @@
                 <h3 class="modal-title">Запись на <span id="modalDate"></span></h3>
                 <img src="photos/gif2.jpg" alt="" class="name-gif">
             </div>
-
             <form class="booking-form">
                 <div class="form-group">
                     <label for="master-select">Выберите мастера</label>
@@ -171,7 +135,6 @@
                         <option value="Ксения Маева">Ксения Маева</option>
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label for="service-select">Выберите услугу</label>
                     <select id="service-select" required>
@@ -187,12 +150,10 @@
                         <option value="smart-педикюр">smart-педикюр</option>
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label for="booking-date-input">Дата</label>
                     <input type="text" id="booking-date-input" readonly required>
                 </div>
-
                 <div class="form-group">
                     <label for="booking-time">Время</label>
                     <select id="booking-time" required>
@@ -205,7 +166,6 @@
                         <option value="20:00">20:00</option>
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label for="booking-address">Адрес</label>
                     <select id="booking-address" required>
@@ -214,56 +174,42 @@
                         <option value="г. Москва, ул. Арбатская 52">г. Москва, ул. Арбатская 52</option>
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label for="client-name">Ваше имя</label>
                     <input type="text" id="client-name" placeholder="Имя Фамилия" required>
                 </div>
-
                 <div class="form-group">
                     <label for="client-phone">Телефон</label>
                     <input type="tel" id="client-phone" placeholder="+7 (___) ___-__-__" required>
                 </div>
-
                 <button type="submit" class="submit-btn">Записаться</button>
             </form>
         </div>
     </div>
 
     <footer class="footer">
-        <!-- Фоновая анимация цветов, как в шапке -->
         <div class="bg-animation">
-            <div class="floating-flower" style="left: 8%;  animation-duration: 13s; animation-delay: 0s;"></div>
-            <div class="floating-flower" style="left: 30%; animation-duration: 17s; animation-delay: 2s;"></div>
-            <div class="floating-flower" style="left: 52%; animation-duration: 15s; animation-delay: 4s;"></div>
-            <div class="floating-flower" style="left: 74%; animation-duration: 19s; animation-delay: 1s;"></div>
-            <div class="floating-flower" style="left: 92%; animation-duration: 16s; animation-delay: 3s;"></div>
+            <div class="floating-flower" style="left:8%;animation-duration:13s;animation-delay:0s"></div>
+            <div class="floating-flower" style="left:30%;animation-duration:17s;animation-delay:2s"></div>
+            <div class="floating-flower" style="left:52%;animation-duration:15s;animation-delay:4s"></div>
+            <div class="floating-flower" style="left:74%;animation-duration:19s;animation-delay:1s"></div>
+            <div class="floating-flower" style="left:92%;animation-duration:16s;animation-delay:3s"></div>
         </div>
-
-        <!-- Гигантская надпись -->
         <div class="footer-logo">HANDY</div>
-
         <div class="footer-content">
             <div class="footer-contacts">
                 <a class="footer-line">+7 777 777 77 77</a>
                 <a class="footer-line">pochta@mail.ru</a>
-
                 <p class="footer-line footer-gap">Адреса главных офисов:</p>
                 <p class="footer-line">г.Москва, ул.Московская 67</p>
                 <p class="footer-line">г.Москва, ул.Арбатская 52</p>
-
                 <p class="footer-line footer-gap">Соц. сети:</p>
-
                 <div class="footer-social">
                     <a href="#" class="social-btn" aria-label="ВКонтакте">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M13.1 16.2c-5.9 0-9.8-4.2-9.9-11.2h3.1c.1 5.1 2.4 7.3 4.1 7.7V5h2.9v6.6c1.8-.2 3.5-2.3 4.2-4.5h2.9c-.5 2.5-2.3 4.5-3.7 5.3 1.4.6 3.4 2.4 4.1 5.3h-3.2c-.7-2.2-2.4-3.9-4.3-4.1v4.1h-.2z"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24"><path d="M13.1 16.2c-5.9 0-9.8-4.2-9.9-11.2h3.1c.1 5.1 2.4 7.3 4.1 7.7V5h2.9v6.6c1.8-.2 3.5-2.3 4.2-4.5h2.9c-.5 2.5-2.3 4.5-3.7 5.3 1.4.6 3.4 2.4 4.1 5.3h-3.2c-.7-2.2-2.4-3.9-4.3-4.1v4.1h-.2z"/></svg>
                     </a>
                     <a href="#" class="social-btn" aria-label="Telegram">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M21.5 4.3 2.9 11.6c-1 .4-1 1.3-.2 1.6l4.7 1.5 1.8 5.6c.2.6.4.8 1 .8.5 0 .7-.2 1-.5l2.4-2.3 4.8 3.6c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.5-1.9-1.5-1.4z"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24"><path d="M21.5 4.3 2.9 11.6c-1 .4-1 1.3-.2 1.6l4.7 1.5 1.8 5.6c.2.6.4.8 1 .8.5 0 .7-.2 1-.5l2.4-2.3 4.8 3.6c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.5-1.9-1.5-1.4z"/></svg>
                     </a>
                     <a href="#" class="social-btn" aria-label="Instagram">
                         <svg viewBox="0 0 24 24">

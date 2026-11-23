@@ -3,43 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вход / Регистрация — HANDY</title>
+    <title>вход и регистрация</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="photos/flower.svg">
     <style>
-        body { background: #ffdbf7; min-height: 100vh; display: flex;
-               align-items: center; justify-content: center; }
+        body {
+            background: #ffdbf7;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-flower {
+            position: absolute;
+            bottom: -150px;
+            width: clamp(80px, 12vw, 160px);
+            height: clamp(80px, 12vw, 160px);
+            background: url('photos/flower.svg') center/contain no-repeat;
+            opacity: .4;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg) scale(.8);
+                opacity: 0;
+            }
+            10% { opacity: .4; }
+            50% {
+                transform: translateY(-300px) translateX(40px) rotate(45deg) scale(1.1);
+                opacity: .5;
+            }
+            90% { opacity: .4; }
+            100% {
+                transform: translateY(-600px) translateX(-40px) rotate(90deg) scale(.9);
+                opacity: 0;
+            }
+        }
+
         .box {
-            background: #fff; border: 8px solid #ffcce6; padding: 40px;
-            width: 90%; max-width: 420px;
+            position: relative;
+            z-index: 2;
+            background: #fff;
+            border: clamp(5px, 1.5vw, 8px) solid #ffcce6;
+            padding: clamp(20px, 5vw, 40px);
+            width: min(90%, 420px);
         }
-        h1 { font-family: 'Cormorant Garamond', serif; font-size: 34px;
-             color: #ff69b4; text-align: center; text-transform: lowercase;
-             margin-bottom: 25px; letter-spacing: 2px; }
-        form { display: flex; flex-direction: column; gap: 14px; }
-        label { font-family: Georgia, serif; font-size: 14px; color: #bd83a7;
-                text-transform: lowercase; }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(26px, 5vw, 34px);
+            color: #ff69b4;
+            text-align: center;
+            text-transform: lowercase;
+            margin-bottom: clamp(18px, 4vw, 25px);
+            letter-spacing: 2px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(10px, 2.5vw, 14px);
+        }
+
+        label {
+            font-family: Georgia, serif;
+            font-size: clamp(13px, 2.5vw, 14px);
+            color: #bd83a7;
+            text-transform: lowercase;
+        }
+
         input {
-            padding: 12px 15px; border: 2px solid #ffcce6;
-            font-family: 'Cormorant Garamond', serif; font-size: 16px;
+            padding: clamp(10px, 2vw, 12px) clamp(12px, 3vw, 15px);
+            border: 2px solid #ffcce6;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(15px, 3vw, 16px);
         }
-        input:focus { outline: none; border-color: #ff69b4; }
+
+        input:focus {
+            outline: none;
+            border-color: #ff69b4;
+        }
+
         button {
-            padding: 14px; background: #ff69b4; color: #fff; border: none;
-            font-family: Georgia, serif; font-size: 17px; cursor: pointer;
-            text-transform: lowercase; letter-spacing: 1px; margin-top: 8px;
+            padding: clamp(11px, 2.5vw, 14px);
+            background: #ff69b4;
+            color: #fff;
+            border: none;
+            font-family: Georgia, serif;
+            font-size: clamp(15px, 3vw, 17px);
+            cursor: pointer;
+            text-transform: lowercase;
+            letter-spacing: 1px;
+            margin-top: 8px;
         }
-        button:hover { background: #d63384; }
-        .switch { text-align: center; margin-top: 18px; font-family: Georgia, serif;
-                  font-size: 14px; color: #bd83a7; }
-        .switch a { color: #ff69b4; cursor: pointer; }
-        .error { color: #b3005e; font-family: Georgia, serif; font-size: 14px;
-                 text-align: center; margin-bottom: 10px; min-height: 18px; }
-        .hidden { display: none; }
+
+        button:hover {
+            background: #d63384;
+        }
+
+        .switch {
+            text-align: center;
+            margin-top: clamp(14px, 3vw, 18px);
+            font-family: Georgia, serif;
+            font-size: clamp(13px, 2.5vw, 14px);
+            color: #bd83a7;
+        }
+
+        .switch a {
+            color: #ff69b4;
+            cursor: pointer;
+        }
+
+        .error {
+            color: #b3005e;
+            font-family: Georgia, serif;
+            font-size: clamp(13px, 2.5vw, 14px);
+            text-align: center;
+            margin-bottom: 10px;
+            min-height: 18px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .card-spin-flower {
+            position: absolute;
+            width: clamp(55px, 10vw, 90px);
+            height: clamp(55px, 10vw, 90px);
+            background: url('photos/flower.svg') center/contain no-repeat;
+            z-index: 6;
+            pointer-events: none;
+            animation: flowerSpin 9s linear infinite;
+        }
+
+        .card-spin-flower-tr {
+            top: calc(clamp(55px, 10vw, 90px) / -2);
+            right: calc(clamp(55px, 10vw, 90px) / -2);
+        }
+
+        .card-spin-flower-bl {
+            bottom: calc(clamp(55px, 10vw, 90px) / -2);
+            left: calc(clamp(55px, 10vw, 90px) / -2);
+            animation-direction: reverse;
+        }
+
+        @keyframes flowerSpin {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
+    <div class="bg-animation">
+        <div class="floating-flower" style="left:5%;animation-duration:12s;animation-delay:0s"></div>
+        <div class="floating-flower" style="left:25%;animation-duration:16s;animation-delay:3s"></div>
+        <div class="floating-flower" style="left:45%;animation-duration:14s;animation-delay:1s"></div>
+        <div class="floating-flower" style="left:65%;animation-duration:18s;animation-delay:5s"></div>
+        <div class="floating-flower" style="left:85%;animation-duration:15s;animation-delay:2s"></div>
+    </div>
+
     <div class="box">
-        <!-- ФОРМА ВХОДА -->
+        <div class="card-spin-flower card-spin-flower-tr"></div>
+        <div class="card-spin-flower card-spin-flower-bl"></div>
+
         <div id="loginBox">
             <h1>вход</h1>
             <div class="error" id="loginError"></div>
@@ -50,11 +192,9 @@
                 <input type="password" name="password" required>
                 <button type="submit">войти</button>
             </form>
-            <p class="switch">Нет аккаунта?
-                <a onclick="showRegister()">зарегистрироваться</a></p>
+            <p class="switch">Нет аккаунта? <a onclick="showRegister()">зарегистрироваться</a></p>
         </div>
 
-        <!-- ФОРМА РЕГИСТРАЦИИ -->
         <div id="registerBox" class="hidden">
             <h1>регистрация</h1>
             <div class="error" id="registerError"></div>
@@ -67,57 +207,43 @@
                 <input type="password" name="password" minlength="6" required>
                 <button type="submit">зарегистрироваться</button>
             </form>
-            <p class="switch">Уже есть аккаунт?
-                <a onclick="showLogin()">войти</a></p>
+            <p class="switch">Уже есть аккаунт? <a onclick="showLogin()">войти</a></p>
         </div>
 
-        <p class="switch"><a href="/">← на главную</a></p>
+        <p class="switch"><a href="/">на главную</a></p>
     </div>
 
 <script>
-function showRegister() {
+function showRegister(){
     document.getElementById('loginBox').classList.add('hidden');
     document.getElementById('registerBox').classList.remove('hidden');
 }
-function showLogin() {
+function showLogin(){
     document.getElementById('registerBox').classList.add('hidden');
     document.getElementById('loginBox').classList.remove('hidden');
 }
 
-// --- ВХОД ---
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
+document.getElementById('loginForm').addEventListener('submit', async e => {
     e.preventDefault();
-    const form = e.target;
-    const errEl = document.getElementById('loginError');
+    const form = e.target, errEl = document.getElementById('loginError');
     errEl.textContent = '';
-
     const res = await fetch('/api/login', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            phone: form.phone.value.trim(),
-            password: form.password.value
-        })
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ phone: form.phone.value.trim(), password: form.password.value })
     });
     const data = await res.json();
-
-    if (res.ok) {
-        window.location.href = '/cabinet';
-    } else {
-        errEl.textContent = data.error || 'Ошибка';
-    }
+    if (res.ok) window.location.href = '/cabinet';
+    else errEl.textContent = data.error || 'Ошибка';
 });
 
-// --- РЕГИСТРАЦИЯ ---
-document.getElementById('registerForm').addEventListener('submit', async (e) => {
+document.getElementById('registerForm').addEventListener('submit', async e => {
     e.preventDefault();
-    const form = e.target;
-    const errEl = document.getElementById('registerError');
+    const form = e.target, errEl = document.getElementById('registerError');
     errEl.textContent = '';
-
     const res = await fetch('/api/register', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
             name: form.name.value.trim(),
             phone: form.phone.value.trim(),
@@ -125,12 +251,8 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
         })
     });
     const data = await res.json();
-
-    if (res.ok) {
-        window.location.href = '/cabinet';
-    } else {
-        errEl.textContent = data.error || 'Ошибка';
-    }
+    if (res.ok) window.location.href = '/cabinet';
+    else errEl.textContent = data.error || 'Ошибка';
 });
 </script>
 </body>
