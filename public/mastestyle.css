@@ -435,7 +435,7 @@ body {
     border-radius: 50%;
 }
 
-.card-spin-flower {
+.master-card .card-spin-flower {
     position: absolute;
     width: clamp(60px, 8vw, 90px);
     height: clamp(60px, 8vw, 90px);
@@ -449,17 +449,18 @@ body {
 }
 
 .card-spin-flower-tr {
-    top: calc(clamp(60px, 8vw, 90px) / -2);
-    right: calc(clamp(60px, 8vw, 90px) / -2);
-    left: auto;
-    bottom: auto;
+    top: 0;
+    right: 0;
+    margin-top: calc(clamp(60px, 8vw, 90px) * -0.5);
+    margin-right: calc(clamp(60px, 8vw, 90px) * -0.5);
+    animation-direction: normal;
 }
 
 .card-spin-flower-br {
-    bottom: calc(clamp(60px, 8vw, 90px) / -2);
-    left: calc(clamp(60px, 8vw, 90px) / -2);
-    top: auto;
-    right: auto;
+    bottom: 0;
+    left: 0;
+    margin-bottom: calc(clamp(60px, 8vw, 90px) * -0.5);
+    margin-left: calc(clamp(60px, 8vw, 90px) * -0.5);
     animation-direction: reverse;
 }
 
