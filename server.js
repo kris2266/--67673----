@@ -119,7 +119,7 @@ app.get('/api/me', (req, res) => {
   });
 });
 app.get('/cabinet', requireAuth, (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'lichykabinet.html'));
+  res.sendFile(path.join(__dirname, 'public', 'profile.html'));
 });
 
 app.get('/api/busy', (req, res) => {
